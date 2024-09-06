@@ -9,6 +9,7 @@ Library: D:\Repo_Git\LOG8704\TP1\TP1\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Repo_Git\LOG8704\TP1\TP1\Temp\Burst
+--debug=LineOnly
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\Repo_Git\LOG8704\TP1\TP1\Library\Burst
 --output=D:\Repo_Git\LOG8704\TP1\TP1\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
@@ -126,6 +127,7 @@ Library: D:\Repo_Git\LOG8704\TP1\TP1\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --float-mode=Fast
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Repo_Git\LOG8704\TP1\TP1\Temp\Burst
+--debug=LineOnly
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\Repo_Git\LOG8704\TP1\TP1\Library\Burst
 --output=D:\Repo_Git\LOG8704\TP1\TP1\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
@@ -143,6 +145,7 @@ Library: D:\Repo_Git\LOG8704\TP1\TP1\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Repo_Git\LOG8704\TP1\TP1\Temp\Burst
+--debug=LineOnly
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\Repo_Git\LOG8704\TP1\TP1\Library\Burst
 --output=D:\Repo_Git\LOG8704\TP1\TP1\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
