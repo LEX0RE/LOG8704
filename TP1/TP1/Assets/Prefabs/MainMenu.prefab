@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7230442346786276762}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6331894690771096406}
+        m_TargetAssemblyTypeName: OnBoardingStep, Assembly-CSharp
+        m_MethodName: EndStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3108580755615749791
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +419,7 @@ GameObject:
   - component: {fileID: 8330775999893059147}
   - component: {fileID: 6536792566269738104}
   - component: {fileID: 405786746638256479}
+  - component: {fileID: 6331894690771096406}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -498,3 +511,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6331894690771096406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344525116275920220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0d2ddab43b54d40941d3fd6247c074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

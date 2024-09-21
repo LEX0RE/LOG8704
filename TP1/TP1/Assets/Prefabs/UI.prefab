@@ -116,6 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_startButton: {fileID: 2508964719852571961}
+  m_steps:
+  - {fileID: 6969010422950100235}
 --- !u!1001 &4087757685024682071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,12 +234,12 @@ PrefabInstance:
     - target: {fileID: 6344525116275920220, guid: 1729a20bf1a345f45ab070546c087d4c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6536792566269738104, guid: 1729a20bf1a345f45ab070546c087d4c,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -253,6 +255,12 @@ RectTransform:
 --- !u!1 &2508964719852571961 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1903619572243119470, guid: 1729a20bf1a345f45ab070546c087d4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4087757685024682071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6969010422950100235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6344525116275920220, guid: 1729a20bf1a345f45ab070546c087d4c,
     type: 3}
   m_PrefabInstance: {fileID: 4087757685024682071}
   m_PrefabAsset: {fileID: 0}

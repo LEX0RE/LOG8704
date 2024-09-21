@@ -10,13 +10,13 @@ public class PokemonSpawner : MonoBehaviour
 
     public List<GameObject> PokemonPrefab;
 
-    private int m_PokemonSelectIndex;
+    private int m_PokemonSelectIndex = 0;
     void Start()
     {
         SpawnEventChannel.RaisedEvent += SpawnPokemon;
         SelectEventChannel.RaisedEvent += SelectPokemon;
 
-        if(PokemonPrefab == null ||  PokemonPrefab.Count == 0 )
+        if (PokemonPrefab == null || PokemonPrefab.Count == 0)
         {
             Debug.LogError("The Pokemon list to spawn should not be empty");
             enabled = false;

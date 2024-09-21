@@ -1,65 +1,34 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
 
 public class OnBoardingManager : MonoBehaviour
 {
-    public struct Goal
-    {
-        public GoalTemplate current;
-        public List<GameObject> gameObjects;
-        public bool isCompleted;
-
-        public Goal(GoalTemplate goal, List<GameObject> gameObjects)
-        {
-            this.current = goal;
-            this.isCompleted = false;
-            this.gameObjects = gameObjects;
-        }
-
-        public void Activate()
-        {
-            foreach (GameObject gameObject in this.gameObjects)
-            {
-                gameObject.SetActive(true);
-            }
-        }
-
-        public void Deactivate()
-        {
-            foreach (GameObject gameObject in this.gameObjects)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
-
-    public enum GoalTemplate
-    {
-        Start,
-        ScanSurface
-    }
-
-    [Tooltip("The starting button is the beginning of the guide.")]
-    [SerializeField]
-    GameObject m_startButton;
-
     [Tooltip("Step of the unboarding")]
     [SerializeField]
-    List<Goal> m_goals;
+    List<OnBoardingStep> m_steps;
+
+    private static List<OnBoardingStep> steps;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (this.m_steps.Count > 0)
+        {
+            OnBoardingManager.steps = this.m_steps;
+            OnBoardingStep step = OnBoardingManager.steps[0];
+            Debug.Log(step);
+            step.StartStep();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void NextStep()
     {
-
-    }
-
-    public void Launch()
-    {
-
+        if (OnBoardingManager.steps.Count > 0)
+        {
+            OnBoardingManager.steps.RemoveAt(0);
+            OnBoardingManager.steps.First().StartStep();
+        }
     }
 }
