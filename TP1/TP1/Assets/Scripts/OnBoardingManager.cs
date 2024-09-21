@@ -16,7 +16,7 @@ public class OnBoardingManager : MonoBehaviour
     {
         foreach (var step in m_steps)
         {
-            step.gameObject.SetActive(true);
+            if (!step.GetInitState()) step.gameObject.SetActive(true);
         }
         this.m_nextStepIndex = 0;
         this.NextStep();

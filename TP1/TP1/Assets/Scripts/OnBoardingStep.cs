@@ -24,6 +24,11 @@ public class OnBoardingStep : MonoBehaviour
         this.manager.NextStep();
     }
 
+    public bool GetInitState()
+    {
+        return this.isInit;
+    }
+
     private void Init()
     {
         if (!this.isInit)
