@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,10 +30,11 @@ public class PokemonSpawner : MonoBehaviour
 
     void SelectPokemon(int index)
     {
-        //Make sure we are not selecting out of bound value
-        Assert.Positive(index);
-        Assert.Less(index, PokemonPrefab.Count);
-
+        if (index < 0 || PokemonPrefab.Count < index)
+        {
+            Debug.LogError("Trying to change index of selected Pokemon to invalid number");
+            return;
+        }
 
         m_PokemonSelectIndex = index;
     }
