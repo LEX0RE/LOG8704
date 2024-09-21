@@ -136,15 +136,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScanMarker
       objectReference: {fileID: 0}
+    - target: {fileID: 57573978835748273, guid: bdc77775918d0504286ef3d373eb23df,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 57573978835748273, guid: bdc77775918d0504286ef3d373eb23df,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440139608562723723, guid: bdc77775918d0504286ef3d373eb23df,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853640497972002556, guid: bdc77775918d0504286ef3d373eb23df,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4407635272415044419, guid: bdc77775918d0504286ef3d373eb23df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -544.8042
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4407635272415044419, guid: bdc77775918d0504286ef3d373eb23df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -230.80513
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4407635272415044419, guid: bdc77775918d0504286ef3d373eb23df,
         type: 3}
@@ -191,8 +211,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc77775918d0504286ef3d373eb23df, type: 3}
---- !u!4 &3463454165640219415 stripped
-Transform:
+--- !u!224 &3463454165640219415 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 4407635272415044419, guid: bdc77775918d0504286ef3d373eb23df,
     type: 3}
   m_PrefabInstance: {fileID: 953560099875645524}
@@ -260,6 +280,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveObject
       objectReference: {fileID: 0}
+    - target: {fileID: 4263366768952461972, guid: 868f1ec5d703afc4193b7e0040dcb16e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -283,6 +308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AddObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 718492662649519029, guid: f524bcaaa3ca3ad4e81d143c228a157f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1754359824399994658, guid: f524bcaaa3ca3ad4e81d143c228a157f,
         type: 3}
@@ -461,12 +491,12 @@ PrefabInstance:
     - target: {fileID: 6344525116275920220, guid: 1729a20bf1a345f45ab070546c087d4c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6536792566269738104, guid: 1729a20bf1a345f45ab070546c087d4c,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -554,6 +584,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DetectEnvironnement
       objectReference: {fileID: 0}
+    - target: {fileID: 7693366155822830042, guid: e3aa75d9ead8579418869755b9b324a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -628,6 +663,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RotateObject
       objectReference: {fileID: 0}
+    - target: {fileID: 7909379930741800399, guid: 7f752631a9f55ca4d9474b6635902105,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -651,6 +691,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ScaleObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7110480044916011656, guid: 6d0a4d1d912fb454aa7218972f7692d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9201075268986760320, guid: 6d0a4d1d912fb454aa7218972f7692d6,
         type: 3}

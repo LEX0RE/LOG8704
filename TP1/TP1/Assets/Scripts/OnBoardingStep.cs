@@ -3,22 +3,34 @@ using UnityEngine;
 public class OnBoardingStep : MonoBehaviour
 {
     private OnBoardingManager manager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private bool isInit = false;
+
+    protected void Start()
     {
-        gameObject.SetActive(false);
-        this.manager = FindObjectsByType<OnBoardingManager>(FindObjectsSortMode.None)?[0];
+        this.Init();
     }
 
     public void StartStep()
     {
+        this.Init();
         gameObject.SetActive(true);
 
     }
 
     public void EndStep()
     {
+        this.Init();
         gameObject.SetActive(false);
         this.manager.NextStep();
+    }
+
+    private void Init()
+    {
+        if (!this.isInit)
+        {
+            gameObject.SetActive(false);
+            this.manager = FindObjectsByType<OnBoardingManager>(FindObjectsSortMode.None)?[0];
+            this.isInit = true;
+        }
     }
 }

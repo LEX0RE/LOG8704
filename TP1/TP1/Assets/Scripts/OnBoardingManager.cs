@@ -14,6 +14,10 @@ public class OnBoardingManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        foreach (var step in m_steps)
+        {
+            step.gameObject.SetActive(true);
+        }
         this.m_nextStepIndex = 0;
         this.NextStep();
     }
