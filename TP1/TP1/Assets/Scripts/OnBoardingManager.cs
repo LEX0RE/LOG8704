@@ -9,26 +9,17 @@ public class OnBoardingManager : MonoBehaviour
     [SerializeField]
     List<OnBoardingStep> m_steps;
 
-    private static List<OnBoardingStep> steps;
+    private int m_nextStepIndex;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (this.m_steps.Count > 0)
-        {
-            OnBoardingManager.steps = this.m_steps;
-            OnBoardingStep step = OnBoardingManager.steps[0];
-            Debug.Log(step);
-            step.StartStep();
-        }
+        this.m_nextStepIndex = 0;
+        this.NextStep();
     }
 
-    public static void NextStep()
+    public void NextStep()
     {
-        if (OnBoardingManager.steps.Count > 0)
-        {
-            OnBoardingManager.steps.RemoveAt(0);
-            OnBoardingManager.steps.First().StartStep();
-        }
+        if (this.m_steps.Count > this.m_nextStepIndex) this.m_steps[this.m_nextStepIndex++].StartStep();
     }
 }
