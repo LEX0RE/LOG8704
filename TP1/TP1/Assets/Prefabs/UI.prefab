@@ -247,7 +247,7 @@ PrefabInstance:
     - target: {fileID: 6244934505871025306, guid: 7f752631a9f55ca4d9474b6635902105,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8929365759677857155, guid: 7f752631a9f55ca4d9474b6635902105,
         type: 3}
@@ -1089,10 +1089,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2630770863809584981, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 2630770863809584981, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_isOrthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630770863809584981, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2630770863809584981, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630770863809584981, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7880822591793300429, guid: 82264566e25a39648b6946d3a36a5cc1,
         type: 3}
       propertyPath: m_Name
       value: EndTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880822591793300429, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9222309524102143108, guid: 82264566e25a39648b6946d3a36a5cc1,
         type: 3}
