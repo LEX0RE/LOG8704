@@ -527,6 +527,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AddObject
       objectReference: {fileID: 0}
+    - target: {fileID: 718492662649519029, guid: f524bcaaa3ca3ad4e81d143c228a157f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1754359824399994658, guid: f524bcaaa3ca3ad4e81d143c228a157f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1088,6 +1093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EndTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222309524102143108, guid: 82264566e25a39648b6946d3a36a5cc1,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
