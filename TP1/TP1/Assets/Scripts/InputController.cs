@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
@@ -23,7 +24,8 @@ public class InputController : MonoBehaviour
         if (m_AttemptSpawn)
         {
             m_AttemptSpawn = false;
-            if (RayInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
+            var isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
+            if (!isPointerOverUI && RayInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
             {
                 if (!(arRaycastHit.trackable is ARPlane arPlane))
                     return;
