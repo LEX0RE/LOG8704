@@ -31,8 +31,21 @@ public class InputController : MonoBehaviour
 
                 SpawnEventChannel.RaiseEvent(arRaycastHit.pose.position);
             }
+            
             return;
         }
+
+        if (RayInteractor.interactablesSelected.Count > 0)
+        {
+            foreach (var obj in RayInteractor.interactablesSelected)
+            {
+                Vector3 screenPosition = Camera.main.WorldToScreenPoint(obj.transform.position);
+                Vector2 screenCoordinte = new Vector2(screenPosition.x, screenPosition.y);
+                
+                //TODO Call depth function here
+            }
+        }
+            
 
         var selectState = RayInteractor.logicalSelectState;
         if (selectState.wasPerformedThisFrame)
@@ -50,6 +63,8 @@ public class InputController : MonoBehaviour
         }
 
     }
+    
+    
 
     private bool CheckUIInteraction()
     {
