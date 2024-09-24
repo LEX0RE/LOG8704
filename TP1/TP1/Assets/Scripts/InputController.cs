@@ -12,12 +12,11 @@ public class InputController : MonoBehaviour
 
     public Vector3EventChannelSO SpawnEventChannel;
     public XRRayInteractor RayInteractor;
-
+    public AROcclusionManager m_occlusionManager;
 
     bool m_AttemptSpawn;
     bool m_EverHadSelection;
 
-    private AROcclusionManager m_occlusionManager;
     private XRCpuImage m_image;
     private int m_depthWidth;
     private int m_depthHeight;
@@ -25,7 +24,6 @@ public class InputController : MonoBehaviour
     private Texture2D m_depthTexture;
     void Start()
     {
-        m_occlusionManager = GameObject.FindFirstObjectByType<AROcclusionManager>();
     }
 
     // Update is called once per frame
@@ -52,12 +50,7 @@ public class InputController : MonoBehaviour
             {
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(obj.transform.position);
                 Vector2 screenCoordinates = new Vector2(screenPosition.x, screenPosition.y);
-
-                //TODO Call depth function here
-                float distance = GetDepthFromScreenPosition((int)screenCoordinates.x, (int)screenCoordinates.y, m_depthArray);
-                Supported support = m_occlusionManager.descriptor.environmentDepthImageSupported;
-                Debug.Log("supporte le depth api : " + support);
-                Debug.Log("distance au pokemon = " + distance);
+                float distance = GetDepthFromScreenPosition((int)screenCoordinates.x, (int)screenCoordinates.y);
             }
         }
             
@@ -98,24 +91,24 @@ public class InputController : MonoBehaviour
             m_depthWidth = m_image.width;
             m_depthHeight = m_image.height;
 
-            var buffer = m_depthTexture.GetRawTextureData();
             UpdateRawImage(ref m_depthTexture, m_image, TextureFormat.R16);
+            var buffer = m_depthTexture.GetRawTextureData();
+            m_depthArray = new short[buffer.Length];
             Buffer.BlockCopy(buffer, 0, m_depthArray, 0, buffer.Length);
         }
     }
 
-    // Obtain the depth value in meters at the specified x, y location.
-    private float GetDepthFromScreenPosition(int x, int y, short[] depthArray)
+    private float GetDepthFromScreenPosition(int x, int y)
     {
         GetDepthData();
 
         if (x >= m_depthWidth || x < 0 || y >= m_depthHeight || y < 0)
         {
-            return -1;
+            return -1.0f;
         }
 
         var depthIndex = (y * m_depthWidth) + x;
-        var depthInShort = depthArray[depthIndex];
+        var depthInShort = m_depthArray[depthIndex];
         var depthInMeters = depthInShort / 1000.0f;
         return depthInMeters;
     }
