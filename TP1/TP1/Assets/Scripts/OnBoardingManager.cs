@@ -7,9 +7,9 @@ public class OnBoardingManager : MonoBehaviour
 {
     [Tooltip("Step of the unboarding")]
     [SerializeField]
-    List<OnBoardingStep> m_steps;
+    public List<OnBoardingStep> m_steps;
 
-    private int m_nextStepIndex;
+    public int m_nextStepIndex;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

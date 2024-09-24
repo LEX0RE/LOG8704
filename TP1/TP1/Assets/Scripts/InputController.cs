@@ -15,7 +15,6 @@ public class InputController : MonoBehaviour
     bool m_EverHadSelection;
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -24,7 +23,7 @@ public class InputController : MonoBehaviour
         if (m_AttemptSpawn)
         {
             m_AttemptSpawn = false;
-            var isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
+            var isPointerOverUI = CheckUIInteraction(); 
             if (!isPointerOverUI && RayInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
             {
                 if (!(arRaycastHit.trackable is ARPlane arPlane))
@@ -52,4 +51,16 @@ public class InputController : MonoBehaviour
 
     }
 
+    private bool CheckUIInteraction()
+    {
+        var eventUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
+        
+        var onBoardingManager = GameObject.FindGameObjectWithTag("TutorialMenu").GetComponent<OnBoardingManager>();
+        var isOnboarding = onBoardingManager.m_nextStepIndex < onBoardingManager.m_steps.Count;
+
+        var isSelectionMenuActive = GameObject.FindGameObjectWithTag("SelectionMenu")
+            .GetComponent<PokemonSelectionMenuManager>().m_IsOptionMenuActive;
+        
+        return eventUI || isOnboarding || isSelectionMenuActive;
+    }
 }

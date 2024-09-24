@@ -379,6 +379,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &896015804 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4363412672485368780, guid: d00ec15a25664ec4282a0e149446be15,
+    type: 3}
+  m_PrefabInstance: {fileID: 5702970609029220284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0d2ddab43b54d40941d3fd6247c074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1167446570
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +513,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PokemonSelectionMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959222911799827934, guid: 7999f425808341649b86d0d4669fab95,
+        type: 3}
+      propertyPath: m_TagString
+      value: SelectionMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -984,6 +1001,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281779715531135356, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_TagString
+      value: TutorialMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 896015804}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OnBoardingStep, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633928456878154849, guid: d00ec15a25664ec4282a0e149446be15,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6333956142433486122, guid: d00ec15a25664ec4282a0e149446be15,
         type: 3}
