@@ -1,6 +1,9 @@
+using System;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class InputController : MonoBehaviour
@@ -13,8 +16,16 @@ public class InputController : MonoBehaviour
 
     bool m_AttemptSpawn;
     bool m_EverHadSelection;
+
+    private AROcclusionManager m_occlusionManager;
+    private XRCpuImage m_image;
+    private int m_depthWidth;
+    private int m_depthHeight;
+    private short[] m_depthArray;
+    private Texture2D m_depthTexture;
     void Start()
     {
+        m_occlusionManager = GameObject.FindFirstObjectByType<AROcclusionManager>();
     }
 
     // Update is called once per frame
@@ -40,9 +51,13 @@ public class InputController : MonoBehaviour
             foreach (var obj in RayInteractor.interactablesSelected)
             {
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(obj.transform.position);
-                Vector2 screenCoordinte = new Vector2(screenPosition.x, screenPosition.y);
-                
+                Vector2 screenCoordinates = new Vector2(screenPosition.x, screenPosition.y);
+
                 //TODO Call depth function here
+                float distance = GetDepthFromScreenPosition((int)screenCoordinates.x, (int)screenCoordinates.y, m_depthArray);
+                Supported support = m_occlusionManager.descriptor.environmentDepthImageSupported;
+                Debug.Log("supporte le depth api : " + support);
+                Debug.Log("distance au pokemon = " + distance);
             }
         }
             
@@ -64,8 +79,6 @@ public class InputController : MonoBehaviour
 
     }
     
-    
-
     private bool CheckUIInteraction()
     {
         var eventUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
@@ -77,5 +90,65 @@ public class InputController : MonoBehaviour
             .GetComponent<PokemonSelectionMenuManager>().m_IsOptionMenuActive;
         
         return eventUI || isOnboarding || isSelectionMenuActive;
+    }
+
+    private void GetDepthData()
+    {
+        if (m_occlusionManager && m_occlusionManager.TryAcquireEnvironmentDepthCpuImage(out m_image)) {
+            m_depthWidth = m_image.width;
+            m_depthHeight = m_image.height;
+
+            var buffer = m_depthTexture.GetRawTextureData();
+            UpdateRawImage(ref m_depthTexture, m_image, TextureFormat.R16);
+            Buffer.BlockCopy(buffer, 0, m_depthArray, 0, buffer.Length);
+        }
+    }
+
+    // Obtain the depth value in meters at the specified x, y location.
+    private float GetDepthFromScreenPosition(int x, int y, short[] depthArray)
+    {
+        GetDepthData();
+
+        if (x >= m_depthWidth || x < 0 || y >= m_depthHeight || y < 0)
+        {
+            return -1;
+        }
+
+        var depthIndex = (y * m_depthWidth) + x;
+        var depthInShort = depthArray[depthIndex];
+        var depthInMeters = depthInShort / 1000.0f;
+        return depthInMeters;
+    }
+
+    private void UpdateRawImage(ref Texture2D texture, XRCpuImage image, TextureFormat format)
+    {
+        // Initialize texture if null
+        if (texture == null || texture.width != image.width || texture.height != image.height)
+        {
+            texture = new Texture2D(image.width, image.height, format, false);
+        }
+
+        // Prepare conversion parameters
+        XRCpuImage.ConversionParams conversionParams = new XRCpuImage.ConversionParams
+        {
+            inputRect = new RectInt(0, 0, image.width, image.height),
+            outputDimensions = new Vector2Int(image.width, image.height),
+            outputFormat = format,
+            transformation = XRCpuImage.Transformation.None
+        };
+
+        // Create a NativeArray for raw image data
+        var size = image.GetConvertedDataSize(conversionParams);
+        var rawImageData = new NativeArray<byte>(size, Allocator.Temp);
+
+        // Convert the image to raw data
+        image.Convert(conversionParams, rawImageData);
+
+        // Load raw data into the texture
+        texture.LoadRawTextureData(rawImageData);
+        texture.Apply();
+
+        // Clean up
+        rawImageData.Dispose();
     }
 }
