@@ -85,6 +85,7 @@ public class InputController : MonoBehaviour
         return eventUI || isOnboarding || isSelectionMenuActive;
     }
 
+    // Code to access Depth API inspired by : https://developers.google.com/ar/develop/unity-arf/depth/developer-guide
     private void GetDepthData()
     {
         if (m_occlusionManager && m_occlusionManager.TryAcquireEnvironmentDepthCpuImage(out m_image)) {
