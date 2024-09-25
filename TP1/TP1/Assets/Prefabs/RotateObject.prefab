@@ -470,6 +470,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EndStep
       objectReference: {fileID: 0}
+    - target: {fileID: 4322452154451099044, guid: e27b87213a59b124d81ba07986e4755f,
+        type: 3}
+      propertyPath: m_text
+      value: Continue
+      objectReference: {fileID: 0}
     - target: {fileID: 4929742742347909571, guid: e27b87213a59b124d81ba07986e4755f,
         type: 3}
       propertyPath: m_Name
