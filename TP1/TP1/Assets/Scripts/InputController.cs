@@ -76,13 +76,13 @@ public class InputController : MonoBehaviour
     {
         var eventUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
         
-        var onBoardingManager = GameObject.FindGameObjectWithTag("TutorialMenu").GetComponent<OnBoardingManager>();
-        var isOnboarding = onBoardingManager.m_nextStepIndex < onBoardingManager.m_steps.Count;
+        // var onBoardingManager = GameObject.FindGameObjectWithTag("TutorialMenu").GetComponent<OnBoardingManager>();
+        // var isOnboarding = onBoardingManager.m_nextStepIndex < onBoardingManager.m_steps.Count;
 
         var isSelectionMenuActive = GameObject.FindGameObjectWithTag("SelectionMenu")
             .GetComponent<PokemonSelectionMenuManager>().m_IsOptionMenuActive;
         
-        return eventUI || isOnboarding || isSelectionMenuActive;
+        return eventUI || isSelectionMenuActive;
     }
 
     // Code to access Depth API inspired by : https://developers.google.com/ar/develop/unity-arf/depth/developer-guide
