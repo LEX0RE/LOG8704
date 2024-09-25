@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class OnBoardingStep : MonoBehaviour
@@ -19,6 +20,12 @@ public class OnBoardingStep : MonoBehaviour
 
     public void EndStep()
     {
+        StartCoroutine(WaitSomeSecond());
+    }
+
+    private IEnumerator WaitSomeSecond()
+    {
+        yield return new WaitForSeconds(0.2f);
         this.Init();
         gameObject.SetActive(false);
         this.manager.NextStep();
