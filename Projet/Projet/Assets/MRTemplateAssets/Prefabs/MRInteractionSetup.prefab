@@ -1451,6 +1451,7 @@ GameObject:
   - component: {fileID: 1064248136195295827}
   - component: {fileID: 654720365977580427}
   - component: {fileID: 3583538583050904333}
+  - component: {fileID: 4226690905495326758}
   m_Layer: 0
   m_Name: AR Session
   m_TagString: Untagged
@@ -1500,6 +1501,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa850fbd5b8aded44846f96e35f1a9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4226690905495326758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8993040715512175147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50683c4e5e46e814ab4894621ca6e251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PermissionId: com.oculus.permission.USE_SCENE
+  m_PermissionDenied:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PermissionGranted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &111397346177301739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1672,7 +1692,7 @@ PrefabInstance:
       value: 0.008092564
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 94eebd9d324eddd49be6e843f56d7ec0, type: 2}
     - target: {fileID: -3887185075125053422, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
@@ -1680,7 +1700,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.data[0]
+      propertyPath: 'm_BlendShapeWeights.Array.data[0]'
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
@@ -2499,6 +2519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <trackablesChanged>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   m_PlanePrefab: {fileID: 5982963534685165758, guid: b08aa487cadd25e48bd9a7c9c00d7680, type: 3}
   m_DetectionMode: 1
 --- !u!4 &5725254047580564444 stripped
@@ -2555,6 +2578,7 @@ MonoBehaviour:
   m_FocusMode: -1
   m_LightEstimationMode: -1
   m_AutoFocus: 1
+  m_ImageStabilization: 0
   m_LightEstimation: 0
   m_FacingDirection: 1
   m_RenderMode: 0
@@ -2596,12 +2620,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!4 &6484816944748581674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 657184242222895506, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
@@ -2794,7 +2818,7 @@ PrefabInstance:
       value: 0.008092564
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 94eebd9d324eddd49be6e843f56d7ec0, type: 2}
     - target: {fileID: -3887185075125053422, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
@@ -2802,7 +2826,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: e967ecd8d9300bd45937484b77a58032, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.data[0]
+      propertyPath: 'm_BlendShapeWeights.Array.data[0]'
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e967ecd8d9300bd45937484b77a58032, type: 3}

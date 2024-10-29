@@ -30,7 +30,7 @@ public class GazeTooltips : MonoBehaviour
         if (m_XROrigin == null)
         {
 #if UNITY_2022_3_OR_NEWER
-                m_XROrigin = FindFirstObjectByType<XROrigin>();
+            m_XROrigin = FindFirstObjectByType<XROrigin>();
 #else
             m_XROrigin = FindObjectOfType<XROrigin>();
 #endif

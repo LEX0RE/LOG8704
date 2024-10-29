@@ -7,7 +7,7 @@ public class NotePlayer : MonoBehaviour
     public AudioClip m_Sound;
 
     [SerializeField]
-    public float m_Interval = 2f;
+    public float m_Interval = 5f;
 
     private AudioSource m_AudioSource;
     private bool m_IsPlaying;
@@ -18,13 +18,13 @@ public class NotePlayer : MonoBehaviour
         this.m_AudioSource.clip = m_Sound;
         this.m_AudioSource.playOnAwake = true;
         this.m_IsPlaying = false;
+        this.m_AudioSource.loop = false;
         this.Play();
     }
 
     public void Play()
     {
         this.m_IsPlaying = true;
-        this.m_AudioSource.Play();
         StartCoroutine(this.PlaySound());
     }
 
@@ -46,8 +46,8 @@ public class NotePlayer : MonoBehaviour
             this.m_AudioSource.Stop();
             this.m_AudioSource.time = 0;
             this.m_AudioSource.Play();
+            Debug.Log("Sound");
             yield return new WaitForSeconds(this.m_Interval);
-
         }
     }
 }
