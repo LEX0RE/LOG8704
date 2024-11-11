@@ -46,7 +46,6 @@ public class NotePlayer : MonoBehaviour
             this.m_AudioSource.Stop();
             this.m_AudioSource.time = 0;
             this.m_AudioSource.Play();
-            Debug.Log("Sound");
             yield return new WaitForSeconds(this.m_Interval);
         }
     }

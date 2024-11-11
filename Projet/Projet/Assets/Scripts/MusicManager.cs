@@ -6,15 +6,14 @@ public class MusicManager : MonoBehaviour
 {
     public int m_bpm = 60;
 
-    private List<NoteComponent> m_Notes;
+    private List<NoteComponent> m_MusicalBoxes;
     private float m_halfTimeInSecond;
     private float m_time = 0.5f;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_Notes = new List<NoteComponent>();
+        m_MusicalBoxes = new List<NoteComponent>();
         // m_Notes.Add(new NoteComponent());
 
         m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
@@ -62,12 +61,12 @@ public class MusicManager : MonoBehaviour
 
     public void RegisterNote(NoteComponent newNote)
     {
-        m_Notes.Add(newNote);
+        m_MusicalBoxes.Add(newNote);
     }
 
     public void UnregisterNote(NoteComponent noteToUnregister)
     {
-        m_Notes.Remove(noteToUnregister);
+        m_MusicalBoxes.Remove(noteToUnregister);
     }
 
     private IEnumerator PlayNotes()
@@ -77,7 +76,7 @@ public class MusicManager : MonoBehaviour
             float beginTime = Time.time;
             m_time += 0.5f;
 
-            foreach(NoteComponent note in m_Notes)
+            foreach(NoteComponent note in m_MusicalBoxes)
             {
                 if (note.CheckActiveStatus(m_time))
                 {

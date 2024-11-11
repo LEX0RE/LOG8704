@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5489529728118801634}
   - component: {fileID: 4195373969222037686}
   - component: {fileID: 7126883413987647104}
-  - component: {fileID: 5723574059964686624}
+  - component: {fileID: 5250168504638154271}
   m_Layer: 0
-  m_Name: MusicalNote
+  m_Name: Musical Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!114 &5723574059964686624
+--- !u!114 &5250168504638154271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,8 +269,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7100894814005865888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8116f2781665a37429624ff925f955f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 42e98dc986501a646a946a53b01484aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Sound: {fileID: 0}
-  m_Interval: 5
+  m_Sound: {fileID: 8300000, guid: 5101c2bb5d881064f8de2616255250f9, type: 3}
+  m_SoundDuration: 0
+  m_Frequency: 1
+  m_Volume: 0
+  m_startTime: 1
+  m_noteDuration: 8
