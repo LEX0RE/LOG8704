@@ -49,8 +49,8 @@ public class MusicalBoxEdition : MonoBehaviour
 				XRHandJoint handJoint = m_HandSubsystem.rightHand.GetJoint(XRHandJointID.MiddleMetacarpal);
 				if (handJoint.trackingState != XRHandJointTrackingState.None && handJoint.TryGetPose(out Pose pose))
 				{
-					Vector3 handJointPosition = m_PolySpatialCameraTransform.InverseTransformPoint(pose.position);
-					this.noteInEdition.transform.position = m_PolySpatialCameraTransform.TransformPoint(handJointPosition); 
+					Vector3 handJointPosition = m_XROrigin.transform.InverseTransformPoint(pose.position);
+					this.noteInEdition.transform.position = m_XROrigin.transform.TransformPoint(handJointPosition); 
 					this.noteInEdition.transform.rotation = pose.rotation;
 				}
 			}
