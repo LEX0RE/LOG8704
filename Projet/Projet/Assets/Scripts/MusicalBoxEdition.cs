@@ -7,13 +7,16 @@ using UnityEngine.XR.Management;
 public class MusicalBoxEdition : MonoBehaviour
 {
 	[SerializeField]
-	GameObject musicalBoxPrefab;
+	private GameObject musicalBoxPrefab;
 
 	[SerializeField]
-	GameObject m_XROrigin;
+	private GameObject m_XROrigin;
 
 	[SerializeField]
 	private MusicManager musicManager;
+
+	[SerializeField]
+	private float noteEditionHeight = 0.1f;
 
 	private XRHandSubsystem m_HandSubsystem;
 	private GameObject noteInEdition;
@@ -30,28 +33,60 @@ public class MusicalBoxEdition : MonoBehaviour
 				XRLoader loader = manager.activeLoader;
 				if (loader != null)
 				{
-					this.m_HandSubsystem = loader.GetLoadedSubsystem<XRHandSubsystem>();
+					m_HandSubsystem = loader.GetLoadedSubsystem<XRHandSubsystem>();
 					if (!CheckHandSubsystem())
 						return;
 
-					this.m_HandSubsystem.Start();
+					m_HandSubsystem.Start();
 				}
 			}
 		}
 	}
 
+	public void CreateNote()
+	{
+
+		if (!isNoteInEditing) {
+			Debug.Log("Creating Editing Note");
+			isNoteInEditing = true;
+
+			GameObject musicalBox = Instantiate(musicalBoxPrefab);
+
+			noteInEdition = musicalBox;
+			musicManager.RegisterNote(noteInEdition.GetComponent<NoteComponent>());
+		}
+	}
+
+	public void DestroyNote()
+	{
+		if (isNoteInEditing) {
+			Debug.Log("Deleting Editing Note");
+			isNoteInEditing = false;
+
+			musicManager.UnregisterNote(noteInEdition.GetComponent<NoteComponent>());
+
+			Destroy(noteInEdition);
+			noteInEdition = null;
+		}
+	}
+
     void Update()
 	{
+		Debug.Log("TryUpdateHands: " + m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) + "\nisNoteInEditing: " + isNoteInEditing);
 		if (CheckHandSubsystem() && isNoteInEditing) 
 		{
 			if ((m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) & XRHandSubsystem.UpdateSuccessFlags.RightHandRootPose) != 0)
 			{
 				XRHandJoint handJoint = m_HandSubsystem.rightHand.GetJoint(XRHandJointID.MiddleMetacarpal);
+				
 				if (handJoint.trackingState != XRHandJointTrackingState.None && handJoint.TryGetPose(out Pose pose))
 				{
 					Vector3 handJointPosition = m_XROrigin.transform.InverseTransformPoint(pose.position);
-					this.noteInEdition.transform.position = m_XROrigin.transform.TransformPoint(handJointPosition); 
-					this.noteInEdition.transform.rotation = pose.rotation;
+					Vector3 nextPosition = m_XROrigin.transform.TransformPoint(handJointPosition);
+					nextPosition.y += noteEditionHeight; 
+
+					noteInEdition.transform.position = nextPosition;
+					noteInEdition.transform.rotation = pose.rotation;
 				}
 			}
 		}
@@ -68,29 +103,5 @@ public class MusicalBoxEdition : MonoBehaviour
 		}
 
 		return true;
-	}
-
-	public void CreateNote()
-	{
-		if (!this.isNoteInEditing) {
-			this.isNoteInEditing = true;
-
-			GameObject musicalBox = Instantiate(musicalBoxPrefab);
-
-			this.noteInEdition = musicalBox;
-			this.musicManager.RegisterNote(this.noteInEdition.GetComponent<NoteComponent>());
-		}
-	}
-
-	public void DestroyNote()
-	{
-		if (this.isNoteInEditing) {
-			this.isNoteInEditing = false;
-
-			this.musicManager.UnregisterNote(this.noteInEdition.GetComponent<NoteComponent>());
-
-			Destroy(this.noteInEdition);
-			this.noteInEdition = null;
-		}
 	}
 }
