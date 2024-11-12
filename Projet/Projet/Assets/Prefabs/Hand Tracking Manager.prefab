@@ -48,13 +48,13 @@ MonoBehaviour:
   _poseDetections:
     list:
     - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
-      minimumHoldTime: 1
+      minimumHoldTime: 0.5
       posePerformedEvent:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 7196827363531237629, guid: 58640f4cf18f6d248b73535964bad0d4, type: 3}
+          - m_Target: {fileID: 0}
             m_TargetAssemblyTypeName: MusicalBoxEdition, Assembly-CSharp
-            m_MethodName: CreateNote
+            m_MethodName: 
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -67,9 +67,9 @@ MonoBehaviour:
       poseEndedEvent:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 7196827363531237629, guid: 58640f4cf18f6d248b73535964bad0d4, type: 3}
+          - m_Target: {fileID: 0}
             m_TargetAssemblyTypeName: MusicalBoxEdition, Assembly-CSharp
-            m_MethodName: DestroyNote
+            m_MethodName: 
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
