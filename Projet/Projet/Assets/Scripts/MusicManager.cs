@@ -6,14 +6,13 @@ public class MusicManager : MonoBehaviour
 {
     public int m_bpm = 60;
 
-    private List<NoteComponent> m_MusicalBoxes;
+    private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
     private float m_halfTimeInSecond;
     private float m_time = 0.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_MusicalBoxes = new List<NoteComponent>();
         // m_Notes.Add(new NoteComponent());
 
         m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
