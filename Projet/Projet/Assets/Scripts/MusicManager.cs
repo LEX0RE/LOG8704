@@ -80,7 +80,8 @@ public class MusicManager : MonoBehaviour
             {
                 if (note.CheckActiveStatus(m_time))
                 {
-                    if (((m_time - note.m_startTime) % note.m_Frequency) == 0)
+                    float timeStartTimeDelta = m_time - note.m_startTime;
+                    if (timeStartTimeDelta >= 0 && (timeStartTimeDelta % note.m_Frequency) == 0)
                     {
                         note.Play();
                     }
