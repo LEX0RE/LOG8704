@@ -47,6 +47,7 @@ public class MusicalBoxEdition : MonoBehaviour
 	{
 
 		if (!isNoteInEditing) {
+			Debug.Log("Creating Editing Note");
 			isNoteInEditing = true;
 
 			GameObject musicalBox = Instantiate(musicalBoxPrefab);
@@ -59,6 +60,7 @@ public class MusicalBoxEdition : MonoBehaviour
 	public void DestroyNote()
 	{
 		if (isNoteInEditing) {
+			Debug.Log("Deleting Editing Note");
 			isNoteInEditing = false;
 
 			musicManager.UnregisterNote(noteInEdition.GetComponent<NoteComponent>());
@@ -70,20 +72,15 @@ public class MusicalBoxEdition : MonoBehaviour
 
     void Update()
 	{
-		Debug.Log("CheckHandSubsystem: " + CheckHandSubsystem());
-		Debug.Log("isNoteInEditing: " + isNoteInEditing);
+		Debug.Log("TryUpdateHands: " + m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) + "\nisNoteInEditing: " + isNoteInEditing);
 		if (CheckHandSubsystem() && isNoteInEditing) 
 		{
-			Debug.Log("TryUpdateHands: " + m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic));
-			Debug.Log(XRHandSubsystem.UpdateSuccessFlags.RightHandRootPose);
 			if ((m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) & XRHandSubsystem.UpdateSuccessFlags.RightHandRootPose) != 0)
 			{
 				XRHandJoint handJoint = m_HandSubsystem.rightHand.GetJoint(XRHandJointID.MiddleMetacarpal);
-				Debug.Log(handJoint.trackingState);
-				Debug.Log(handJoint.TryGetPose(out Pose poseTest));
+				
 				if (handJoint.trackingState != XRHandJointTrackingState.None && handJoint.TryGetPose(out Pose pose))
 				{
-					Debug.Log(pose.position);
 					Vector3 handJointPosition = m_XROrigin.transform.InverseTransformPoint(pose.position);
 					Vector3 nextPosition = m_XROrigin.transform.TransformPoint(handJointPosition);
 					nextPosition.y += noteEditionHeight; 

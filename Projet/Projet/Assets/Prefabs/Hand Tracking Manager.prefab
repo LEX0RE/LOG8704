@@ -48,7 +48,7 @@ MonoBehaviour:
   _poseDetections:
     list:
     - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
-      minimumHoldTime: 1
+      minimumHoldTime: 0.5
       posePerformedEvent:
         m_PersistentCalls:
           m_Calls:
