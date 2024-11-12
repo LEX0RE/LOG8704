@@ -96,7 +96,6 @@ public class HandTrackingManager : MonoBehaviour
 
     private void OnJointsUpdated(XRHandJointsUpdatedEventArgs eventArgs)
     {
-		Debug.Log(eventArgs.hand.handedness);
         if (!isActiveAndEnabled || Time.timeSinceLevelLoad < this._timeLastCheck + this._poseDetectionInterval)
             return;
 
