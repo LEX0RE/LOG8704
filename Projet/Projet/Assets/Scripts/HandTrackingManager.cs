@@ -9,7 +9,6 @@ using UnityEngine.XR.Hands.Gestures;
 [Serializable]
 public enum HandDetection
 {
-	Both,
 	Left,
 	Right,
 }
@@ -43,7 +42,7 @@ public class PoseDetection
 
 	[SerializeField]
     [Tooltip("The hand that will detect the pose.")]
-    public HandDetection handToDetect = HandDetection.Both;
+    public HandDetection handToDetect;
 
 	[NonSerialized]
     public bool wasDetected;
@@ -101,14 +100,17 @@ public class HandTrackingManager : MonoBehaviour
 
 		foreach(PoseDetection poseDetection in this._poseDetections.list)
 		{
-			bool isDetectedHand = poseDetection.handToDetect == HandDetection.Both ||
-					 			(poseDetection.handToDetect == HandDetection.Left && eventArgs.hand.handedness == Handedness.Left) || 
-					 			(poseDetection.handToDetect == HandDetection.Right && eventArgs.hand.handedness == Handedness.Right);
+			if ((poseDetection.posePerformedEvent == null && poseDetection.poseEndedEvent == null) || poseDetection.handPose == null ||
+				(poseDetection.handToDetect == HandDetection.Left && eventArgs.hand.handedness != Handedness.Left) || 
+				(poseDetection.handToDetect == HandDetection.Right && eventArgs.hand.handedness != Handedness.Right)) 
+			{
+				continue;
+			}
 
-			if ((poseDetection.posePerformedEvent == null && poseDetection.poseEndedEvent == null) || !isDetectedHand)
-				return;
+			bool detected = poseDetection.handPose.CheckConditions(eventArgs);
 
-			bool detected = this._leftTrackingEvents.handIsTracked && poseDetection.handPose != null && poseDetection.handPose.CheckConditions(eventArgs);
+			// TODO Check why right hand can't be detect
+			Debug.Log("Hand: " + eventArgs.hand.handedness + "\nIsTracked: " + eventArgs.hand.isTracked);
 
 			if (!poseDetection.wasDetected && detected)
 			{

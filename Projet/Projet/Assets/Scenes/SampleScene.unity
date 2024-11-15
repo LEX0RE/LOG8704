@@ -3514,16 +3514,36 @@ PrefabInstance:
       value: Hand Tracking Manager
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[0].handToDetect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[1].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 568142838}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[1].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 568142838}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[1].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -3538,12 +3558,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 568142838}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[1].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DestroyNote
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[1].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 568142838}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CreateNote
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[1].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreateNote
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MusicalBoxEdition, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

@@ -20,7 +20,8 @@ public class MusicalBoxEdition : MonoBehaviour
 
 	private XRHandSubsystem m_HandSubsystem;
 	private GameObject noteInEdition;
-	private bool isNoteInEditing = false;
+	private bool isLeftHandFollowed;
+	private static bool isNoteInEditing = false;
 	
 	void Start()
 	{
@@ -43,12 +44,11 @@ public class MusicalBoxEdition : MonoBehaviour
 		}
 	}
 
-	public void CreateNote()
+	public void CreateNote(bool isLeftHand)
 	{
-
 		if (!isNoteInEditing) {
-			Debug.Log("Creating Editing Note");
 			isNoteInEditing = true;
+			isLeftHandFollowed = isLeftHand;
 
 			GameObject musicalBox = Instantiate(musicalBoxPrefab);
 
@@ -57,10 +57,9 @@ public class MusicalBoxEdition : MonoBehaviour
 		}
 	}
 
-	public void DestroyNote()
+	public void DestroyNote(bool isLeftHand)
 	{
-		if (isNoteInEditing) {
-			Debug.Log("Deleting Editing Note");
+		if (isNoteInEditing && isLeftHandFollowed == isLeftHand) {
 			isNoteInEditing = false;
 
 			musicManager.UnregisterNote(noteInEdition.GetComponent<NoteComponent>());
@@ -72,12 +71,16 @@ public class MusicalBoxEdition : MonoBehaviour
 
     void Update()
 	{
-		Debug.Log("TryUpdateHands: " + m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) + "\nisNoteInEditing: " + isNoteInEditing);
 		if (CheckHandSubsystem() && isNoteInEditing) 
 		{
-			if ((m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) & XRHandSubsystem.UpdateSuccessFlags.RightHandRootPose) != 0)
+			XRHandSubsystem.UpdateSuccessFlags handFlag = isLeftHandFollowed ?
+														XRHandSubsystem.UpdateSuccessFlags.LeftHandRootPose :
+														XRHandSubsystem.UpdateSuccessFlags.RightHandRootPose;
+			
+			if ((m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) & handFlag) != 0)
 			{
-				XRHandJoint handJoint = m_HandSubsystem.rightHand.GetJoint(XRHandJointID.MiddleMetacarpal);
+				XRHand hand = isLeftHandFollowed ? m_HandSubsystem.leftHand : m_HandSubsystem.rightHand;
+				XRHandJoint handJoint = hand.GetJoint(XRHandJointID.MiddleMetacarpal);
 				
 				if (handJoint.trackingState != XRHandJointTrackingState.None && handJoint.TryGetPose(out Pose pose))
 				{
