@@ -67,7 +67,8 @@ public class HandTrackingManager : MonoBehaviour
 	[Tooltip("The list of all poses to be detected.")]
 	PoseDetectionList _poseDetections;
 
-    float _timeLastCheck;
+    float _timeLeftLastCheck;
+    float _timeRightLastCheck;
 
     private void OnEnable()
     {
@@ -95,7 +96,9 @@ public class HandTrackingManager : MonoBehaviour
 
     private void OnJointsUpdated(XRHandJointsUpdatedEventArgs eventArgs)
     {
-        if (!isActiveAndEnabled || Time.timeSinceLevelLoad < this._timeLastCheck + this._poseDetectionInterval)
+		float timeLastCheck = eventArgs.hand.handedness == Handedness.Left ? this._timeLeftLastCheck : this._timeRightLastCheck;
+
+        if (!isActiveAndEnabled || Time.timeSinceLevelLoad < timeLastCheck + this._poseDetectionInterval)
             return;
 
 		foreach(PoseDetection poseDetection in this._poseDetections.list)
@@ -136,6 +139,12 @@ public class HandTrackingManager : MonoBehaviour
 			}
 		}
 
-        this._timeLastCheck = Time.timeSinceLevelLoad;
+		if (eventArgs.hand.handedness == Handedness.Left)
+		{
+        	this._timeLeftLastCheck = Time.timeSinceLevelLoad;
+		} else 
+		{
+        	this._timeRightLastCheck = Time.timeSinceLevelLoad;
+		}
     }
 }
