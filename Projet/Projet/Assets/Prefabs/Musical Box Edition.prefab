@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5cac56fc2417d4b8e21a63da886b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicalBoxPrefab: {fileID: 7100894814005865888, guid: 995999510d7cd9a4f96da9a3c389a5e1, type: 3}
-  m_PolySpatialCameraTransform: {fileID: 0}
-  musicManager: {fileID: 7301439083870768681, guid: 0fb403acaad0ea847a32172f4dfaeb25, type: 3}
+  _musicalBoxPrefab: {fileID: 7100894814005865888, guid: 995999510d7cd9a4f96da9a3c389a5e1, type: 3}
+  _noteEditionHeight: 0.1

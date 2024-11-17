@@ -2,109 +2,93 @@
 
 using UnityEngine;
 using UnityEngine.XR.Hands;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Management;
 
 public class MusicalBoxEdition : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject musicalBoxPrefab;
+	private GameObject _musicalBoxPrefab;
 
 	[SerializeField]
-	private GameObject m_XROrigin;
+	private float _noteEditionHeight = 0.1f;
 
-	[SerializeField]
-	private MusicManager musicManager;
+	private MusicManager _musicManager;
+	private HandTrackingManager _handTrackingManager;
 
-	[SerializeField]
-	private float noteEditionHeight = 0.1f;
-
-	private XRHandSubsystem m_HandSubsystem;
-	private GameObject noteInEdition;
-	private bool isLeftHandFollowed;
+	private GameObject _noteInEdition;
+	private bool _isfollowedLeftHand = true;
 	private static bool isNoteInEditing = false;
-	
+
 	void Start()
 	{
-		XRGeneralSettings xrGeneralSettings = XRGeneralSettings.Instance;
-		if (xrGeneralSettings != null)
+		this._handTrackingManager = FindFirstObjectByType<HandTrackingManager>();
+		if (this._handTrackingManager == null)
 		{
-			XRManagerSettings manager = xrGeneralSettings.Manager;
-			if (manager != null)
-			{
-				XRLoader loader = manager.activeLoader;
-				if (loader != null)
-				{
-					m_HandSubsystem = loader.GetLoadedSubsystem<XRHandSubsystem>();
-					if (!CheckHandSubsystem())
-						return;
+			Debug.LogError("Could not find HandTrackingManager");
+			enabled = false;
+			return;
+		}
 
-					m_HandSubsystem.Start();
-				}
-			}
+		this._musicManager = FindFirstObjectByType<MusicManager>();
+		if (this._musicManager == null)
+		{
+			Debug.LogError("Could not find MusicManager");
+			enabled = false;
+			return;
 		}
 	}
 
 	public void CreateNote(bool isLeftHand)
 	{
-		if (!isNoteInEditing) {
+		if (!isNoteInEditing)
+		{
 			isNoteInEditing = true;
-			isLeftHandFollowed = isLeftHand;
+			this._isfollowedLeftHand = isLeftHand;
 
-			GameObject musicalBox = Instantiate(musicalBoxPrefab);
+			GameObject musicalBox = Instantiate(this._musicalBoxPrefab);
 
-			noteInEdition = musicalBox;
-			musicManager.RegisterNote(noteInEdition.GetComponent<NoteComponent>());
+			this._noteInEdition = musicalBox;
+			this._musicManager.RegisterNote(this._noteInEdition.GetComponent<NoteComponent>());
+
+			this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnGrab);
+			Debug.Log("OnGrab listen added");
 		}
 	}
 
 	public void DestroyNote(bool isLeftHand)
 	{
-		if (isNoteInEditing && isLeftHandFollowed == isLeftHand) {
+		if (isNoteInEditing && this._isfollowedLeftHand == isLeftHand)
+		{
 			isNoteInEditing = false;
 
-			musicManager.UnregisterNote(noteInEdition.GetComponent<NoteComponent>());
+			this._musicManager.UnregisterNote(this._noteInEdition.GetComponent<NoteComponent>());
 
-			Destroy(noteInEdition);
-			noteInEdition = null;
+			Destroy(this._noteInEdition);
+			this._noteInEdition = null;
 		}
 	}
 
-    void Update()
+	void Update()
 	{
-		if (CheckHandSubsystem() && isNoteInEditing) 
+		if (isNoteInEditing)
 		{
-			XRHandSubsystem.UpdateSuccessFlags handFlag = isLeftHandFollowed ?
-														XRHandSubsystem.UpdateSuccessFlags.LeftHandRootPose :
-														XRHandSubsystem.UpdateSuccessFlags.RightHandRootPose;
-			
-			if ((m_HandSubsystem.TryUpdateHands(XRHandSubsystem.UpdateType.Dynamic) & handFlag) != 0)
-			{
-				XRHand hand = isLeftHandFollowed ? m_HandSubsystem.leftHand : m_HandSubsystem.rightHand;
-				XRHandJoint handJoint = hand.GetJoint(XRHandJointID.MiddleMetacarpal);
-				
-				if (handJoint.trackingState != XRHandJointTrackingState.None && handJoint.TryGetPose(out Pose pose))
-				{
-					Vector3 handJointPosition = m_XROrigin.transform.InverseTransformPoint(pose.position);
-					Vector3 nextPosition = m_XROrigin.transform.TransformPoint(handJointPosition);
-					nextPosition.y += noteEditionHeight; 
+			HandTransform handTransform = this._handTrackingManager.GetHandTransform(this._isfollowedLeftHand ? Handedness.Left : Handedness.Right);
 
-					noteInEdition.transform.position = nextPosition;
-					noteInEdition.transform.rotation = pose.rotation;
-				}
+			if (handTransform != null)
+			{
+				handTransform.position.y += this._noteEditionHeight;
+
+				this._noteInEdition.transform.position = handTransform.position;
+				this._noteInEdition.transform.rotation = handTransform.rotation;
 			}
 		}
 	}
 
-    private bool CheckHandSubsystem()
+	void OnGrab(SelectEnterEventArgs eventArgs)
 	{
-		if (m_HandSubsystem == null)
-		{
-			Debug.LogError("Could not find Hand Subsystem");
-
-			enabled = false;
-			return false;
-		}
-
-		return true;
+		this._noteInEdition = null;
+		isNoteInEditing = false;
 	}
 }

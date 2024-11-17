@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sound: {fileID: 8300000, guid: 5101c2bb5d881064f8de2616255250f9, type: 3}
-  m_SoundDuration: 0
+  m_SoundDuration: 1
   m_Frequency: 1
   m_Volume: 0
   m_startTime: 1

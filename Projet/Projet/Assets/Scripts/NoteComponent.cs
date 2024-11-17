@@ -3,76 +3,75 @@ using UnityEngine;
 
 public class NoteComponent : MonoBehaviour
 {
-    public AudioClip m_Sound;
-    public float m_SoundDuration;
-    public float m_Frequency = 1.0f;
-    public float m_Volume;
-    public float m_startTime = 1.0f;
-    public float m_noteDuration = 8.0f;
-    private bool m_isActive;
+	public AudioClip m_Sound;
+	public float m_SoundDuration;
+	public float m_Frequency = 1.0f;
+	public float m_Volume;
+	public float m_startTime = 1.0f;
+	public float m_noteDuration = 8.0f;
+	private bool m_isActive;
 
-    private AudioSource m_AudioSource;
-    public void OnSetupComplete()
-    {
-        m_AudioSource = gameObject.AddComponent<AudioSource>();
-        m_AudioSource.clip = m_Sound;
-        m_AudioSource.time = m_SoundDuration;
-        RegisterToManager();
-    }
+	private MusicManager m_musicManager;
+	private AudioSource m_AudioSource;
 
-    private void OnDestroy()
-    {
-        UnregisterToManager();
-    }
+	void Start()
+	{
+		m_AudioSource = gameObject.AddComponent<AudioSource>();
+		m_AudioSource.clip = m_Sound;
+		m_AudioSource.time = m_SoundDuration;
 
-    private void UnregisterToManager()
-    {
-        var managerObject = GameObject.Find("Music Manager");
-        if (managerObject == null)
-        {
-            Debug.LogError("Music Manager is not present");
-        }
-        var manager = managerObject?.GetComponent<MusicManager>();
-        manager?.UnregisterNote(this);
-    }
+		this.m_musicManager = FindFirstObjectByType<MusicManager>();
+		if (this.m_musicManager == null)
+		{
+			Debug.LogError("Could not find MusicManager");
+			enabled = false;
+			return;
+		}
 
-    private void RegisterToManager()
-    {
-        var managerObject = GameObject.Find("Music Manager");
-        if (managerObject == null)
-        {
-            Debug.LogError("Music Manager is not present");
-        }
-        var manager = managerObject?.GetComponent<MusicManager>();
-        manager?.RegisterNote(this);
-    }
+		RegisterToManager();
+	}
 
-    public void Play()
-    {
-        m_AudioSource.Play();
-        Debug.Log("PLAY NOTE");
-    }
+	private void OnDestroy()
+	{
+		UnregisterToManager();
+	}
 
-    public float GetEndTime()
-    {
-        return m_startTime + m_noteDuration;
-    }
+	private void UnregisterToManager()
+	{
+		this.m_musicManager.UnregisterNote(this);
+	}
 
-    public bool GetIsActive()
-    {
-        return m_isActive;
-    }
+	private void RegisterToManager()
+	{
+		this.m_musicManager.RegisterNote(this);
+	}
 
-    public bool CheckActiveStatus(float time)
-    {
-        if (m_isActive && (time < m_startTime || time > GetEndTime()))
-        {
-            m_isActive = false;
-        }
-        else if(!m_isActive && time >= m_startTime && time <= GetEndTime()) 
-        {
-            m_isActive = true;
-        }
-        return m_isActive;
-    }
+	public void Play()
+	{
+		m_AudioSource.Play();
+		Debug.Log("PLAY NOTE");
+	}
+
+	public float GetEndTime()
+	{
+		return m_startTime + m_noteDuration;
+	}
+
+	public bool GetIsActive()
+	{
+		return m_isActive;
+	}
+
+	public bool CheckActiveStatus(float time)
+	{
+		if (m_isActive && (time < m_startTime || time > GetEndTime()))
+		{
+			m_isActive = false;
+		}
+		else if (!m_isActive && time >= m_startTime && time <= GetEndTime())
+		{
+			m_isActive = true;
+		}
+		return m_isActive;
+	}
 }

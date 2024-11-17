@@ -79,7 +79,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      handToDetect: 0
+      handToDetect: 1
     - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
       minimumHoldTime: 0.5
       posePerformedEvent:
@@ -112,4 +112,4 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      handToDetect: 1
+      handToDetect: 2

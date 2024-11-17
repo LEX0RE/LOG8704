@@ -3394,6 +3394,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1833198164}
     - target: {fileID: 7196827363531237629, guid: 58640f4cf18f6d248b73535964bad0d4, type: 3}
+      propertyPath: _musicalBoxPrefab
+      value: 
+      objectReference: {fileID: 7100894814005865888, guid: 995999510d7cd9a4f96da9a3c389a5e1, type: 3}
+    - target: {fileID: 7196827363531237629, guid: 58640f4cf18f6d248b73535964bad0d4, type: 3}
       propertyPath: noteEditionHeight
       value: 0.1
       objectReference: {fileID: 0}
@@ -3515,7 +3519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].handToDetect
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.size
