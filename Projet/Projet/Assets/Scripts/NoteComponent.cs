@@ -14,6 +14,13 @@ public class NoteComponent : MonoBehaviour
 	private MusicManager m_musicManager;
 	private AudioSource m_AudioSource;
 
+	private Color m_flashingColor = Color.blue;
+
+	NoteComponent()
+	{
+		this.SetColor(Color.grey);
+	}
+
 	void Start()
 	{
 		m_AudioSource = gameObject.AddComponent<AudioSource>();
@@ -66,12 +73,19 @@ public class NoteComponent : MonoBehaviour
 	{
 		if (m_isActive && (time < m_startTime || time > GetEndTime()))
 		{
+			this.SetColor(Color.grey);
 			m_isActive = false;
 		}
 		else if (!m_isActive && time >= m_startTime && time <= GetEndTime())
 		{
+			this.SetColor(Color.green);
 			m_isActive = true;
 		}
 		return m_isActive;
+	}
+
+	public void SetColor(Color color)
+	{
+		GetComponent<MeshRenderer>().material.color = color;
 	}
 }
