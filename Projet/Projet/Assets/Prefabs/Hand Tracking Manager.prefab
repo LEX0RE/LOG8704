@@ -47,7 +47,7 @@ MonoBehaviour:
   _poseDetectionInterval: 0.1
   _poseDetections:
     list:
-    - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
+    - handPose: {fileID: 11400000, guid: 9255634385753de4f8f31b1e67eea3aa, type: 2}
       minimumHoldTime: 0.5
       posePerformedEvent:
         m_PersistentCalls:
@@ -80,7 +80,7 @@ MonoBehaviour:
               m_BoolArgument: 0
             m_CallState: 2
       handToDetect: 1
-    - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
+    - handPose: {fileID: 11400000, guid: 9255634385753de4f8f31b1e67eea3aa, type: 2}
       minimumHoldTime: 0.5
       posePerformedEvent:
         m_PersistentCalls:
@@ -112,4 +112,46 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+      handToDetect: 2
+    - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
+      minimumHoldTime: 0.5
+      posePerformedEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: MusicalBoxEdition, Assembly-CSharp
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      poseEndedEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      handToDetect: 1
+    - handPose: {fileID: 11400000, guid: 1e64a9016c1a84b40aa4a4ff2adaf051, type: 2}
+      minimumHoldTime: 0.5
+      posePerformedEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: MusicalBoxEdition, Assembly-CSharp
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      poseEndedEvent:
+        m_PersistentCalls:
+          m_Calls: []
       handToDetect: 2

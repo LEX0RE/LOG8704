@@ -1,10 +1,11 @@
 // Inspired By https://discussions.unity.com/t/object-to-follow-hand-joint/341376 from Follow Object
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Hands;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Management;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class MusicalBoxEdition : MonoBehaviour
 {
@@ -44,16 +45,24 @@ public class MusicalBoxEdition : MonoBehaviour
 	{
 		if (!isNoteInEditing)
 		{
+			GameObject grabbedNote = CheckForGrabbedNote(isLeftHand);
+
 			isNoteInEditing = true;
 			this._isfollowedLeftHand = isLeftHand;
 
-			GameObject musicalBox = Instantiate(this._musicalBoxPrefab);
+			if (grabbedNote == null)
+			{
+				GameObject musicalBox = Instantiate(this._musicalBoxPrefab);
 
-			this._noteInEdition = musicalBox;
-			this._musicManager.RegisterNote(this._noteInEdition.GetComponent<NoteComponent>());
-
-			this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnGrab);
-			Debug.Log("OnGrab listen added");
+				this._noteInEdition = musicalBox;
+				this._musicManager.RegisterNote(this._noteInEdition.GetComponent<NoteComponent>());
+				this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnEndCreation);
+			}
+			else
+			{
+				this._noteInEdition = grabbedNote;
+				this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnEndCreation);
+			}
 		}
 	}
 
@@ -86,9 +95,41 @@ public class MusicalBoxEdition : MonoBehaviour
 		}
 	}
 
-	void OnGrab(SelectEnterEventArgs eventArgs)
+	void OnEndCreation(SelectEnterEventArgs eventArgs)
 	{
-		this._noteInEdition = null;
-		isNoteInEditing = false;
+		if (this._noteInEdition != null)
+		{
+			this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.RemoveListener(OnEndCreation);
+			this._noteInEdition = null;
+			isNoteInEditing = false;
+		}
+	}
+
+	GameObject CheckForGrabbedNote(bool isLeftHand)
+	{
+		GameObject noteInOtherHand = null;
+
+		foreach (NoteComponent note in this._musicManager.Notes)
+		{
+			List<IXRSelectInteractor> interactors = note.GetComponent<XRGrabInteractable>().interactorsSelecting;
+
+			foreach (IXRSelectInteractor interactor in interactors)
+			{
+				if ((interactor.handedness == InteractorHandedness.Left && isLeftHand) ||
+					(interactor.handedness == InteractorHandedness.Right && !isLeftHand))
+				{
+					return note.gameObject;
+				}
+
+				if (noteInOtherHand == null &&
+					((interactor.handedness == InteractorHandedness.Left && !isLeftHand) ||
+					 (interactor.handedness == InteractorHandedness.Right && isLeftHand)))
+				{
+					noteInOtherHand = note.gameObject;
+				}
+			}
+		}
+
+		return noteInOtherHand;
 	}
 }

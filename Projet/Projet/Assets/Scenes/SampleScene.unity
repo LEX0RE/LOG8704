@@ -719,6 +719,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3032334164735723895, guid: 66d40221d132d04499855da9ce315f20, type: 3}
   m_PrefabInstance: {fileID: 1364055689}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &473671403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7301439083870768681, guid: 0fb403acaad0ea847a32172f4dfaeb25, type: 3}
+  m_PrefabInstance: {fileID: 6638844339991165405}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0acf08a8ca85146a14ea6c1405c73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &522728844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5909398001603780732, guid: 58011bca9681c484080084eccc4cb150, type: 3}
@@ -3526,6 +3537,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[2].poseEndedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[3].poseEndedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
@@ -3570,6 +3589,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 568142838}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[2].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 473671403}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[3].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 473671403}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CreateNote
       objectReference: {fileID: 0}
@@ -3578,12 +3605,28 @@ PrefabInstance:
       value: CreateNote
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[2].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[3].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].poseEndedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MusicalBoxEdition, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[2].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[3].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[0].posePerformedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
