@@ -75,12 +75,13 @@ public class MusicManager : MonoBehaviour
             float beginTime = Time.time;
             m_time += 0.5f;
 
+            Debug.Log("Manager time: " + m_time);
             foreach(NoteComponent note in m_MusicalBoxes)
             {
                 if (note.CheckActiveStatus(m_time))
                 {
-                    float timeStartTimeDelta = m_time - note.m_startTime;
-                    if (timeStartTimeDelta >= 0 && (timeStartTimeDelta % note.m_Frequency) == 0)
+                    float timeStartTimeDelta = m_time - note.StartTime;
+                    if (timeStartTimeDelta >= 0 && (timeStartTimeDelta % note.Frequency) == 0)
                     {
                         note.Play();
                     }
