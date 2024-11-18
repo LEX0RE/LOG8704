@@ -4,77 +4,85 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public int m_bpm = 60;
+	public int m_bpm = 60;
 
-    private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
-    private float m_halfTimeInSecond;
-    private float m_time = 0.5f;
+	private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
+	private float m_halfTimeInSecond;
+	private float m_time = 0.5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // m_Notes.Add(new NoteComponent());
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
+	{
+		// m_Notes.Add(new NoteComponent());
 
-        m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
+		m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
 
-        StartMusic();
-    }
+		StartMusic();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+	// Update is called once per frame
+	void Update()
+	{
+	}
 
-    public int GetBpm()
-    {
-        return m_bpm;
-    }
+	public int GetBpm()
+	{
+		return m_bpm;
+	}
 
-    public void SetBpm(int newBpm)
-    {
-        if (newBpm >= 40 && newBpm <= 280)
-        {
-            m_bpm = newBpm;
-            m_halfTimeInSecond = 60.0f / ( 2 * (float)m_bpm);
-        }
-    }
+	public void SetBpm(int newBpm)
+	{
+		if (newBpm >= 40 && newBpm <= 280)
+		{
+			m_bpm = newBpm;
+			m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
+		}
+	}
 
-    public void StartMusic()
-    {
-        StartCoroutine("PlayNotes");
-    }
+	public void StartMusic()
+	{
+		StartCoroutine("PlayNotes");
+	}
 
-    public void StopMusic()
-    {
-        StopCoroutine("PlayNotes");
-    }
+	public void StopMusic()
+	{
+		StopCoroutine("PlayNotes");
+	}
 
-    public void PauseMusic()
-    {
-    }
+	public void PauseMusic()
+	{
+	}
 
-    public void ResetMusic()
-    {
-        m_time = 0.5f;
-    }
+	public void ResetMusic()
+	{
+		m_time = 0.5f;
+	}
 
-    public void RegisterNote(NoteComponent newNote)
-    {
-        m_MusicalBoxes.Add(newNote);
-    }
+	public void RegisterNote(NoteComponent newNote)
+	{
+		m_MusicalBoxes.Add(newNote);
+	}
 
-    public void UnregisterNote(NoteComponent noteToUnregister)
-    {
-        m_MusicalBoxes.Remove(noteToUnregister);
-    }
+	public void UnregisterNote(NoteComponent noteToUnregister)
+	{
+		m_MusicalBoxes.Remove(noteToUnregister);
+	}
 
-    private IEnumerator PlayNotes()
-    {
-        while (true)
-        {
-            float beginTime = Time.time;
-            m_time += 0.5f;
+	public List<NoteComponent> Notes
+	{
+		get
+		{
+			return this.m_MusicalBoxes;
+		}
+	}
 
+	private IEnumerator PlayNotes()
+	{
+		while (true)
+		{
+			float beginTime = Time.time;
+			m_time += 0.5f;
+			
             Debug.Log("Manager time: " + m_time);
             foreach(NoteComponent note in m_MusicalBoxes)
             {
@@ -88,10 +96,12 @@ public class MusicManager : MonoBehaviour
                 }
             }
 
-            float deltaTime = Time.time - beginTime;
-            float waitTime = m_halfTimeInSecond - deltaTime;
+			
 
-            yield return new WaitForSeconds(waitTime);
-        }
-    }
+			float deltaTime = Time.time - beginTime;
+			float waitTime = m_halfTimeInSecond - deltaTime;
+
+			yield return new WaitForSeconds(waitTime);
+		}
+	}
 }
