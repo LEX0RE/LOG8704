@@ -52,17 +52,16 @@ public class MusicalBoxEdition : MonoBehaviour
 
 			if (grabbedNote == null)
 			{
-				GameObject musicalBox = Instantiate(this._musicalBoxPrefab);
+				grabbedNote = Instantiate(this._musicalBoxPrefab);
 
-				this._noteInEdition = musicalBox;
-				this._musicManager.RegisterNote(this._noteInEdition.GetComponent<NoteComponent>());
-				this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnEndCreation);
+				NoteComponent note = grabbedNote.GetComponent<NoteComponent>();
+
+				note.OnSetup();
+				this._musicManager.RegisterNote(note);
 			}
-			else
-			{
-				this._noteInEdition = grabbedNote;
-				this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnEndCreation);
-			}
+
+			this._noteInEdition = grabbedNote;
+			this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnEndCreation);
 		}
 	}
 
