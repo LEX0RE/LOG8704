@@ -22,6 +22,11 @@ public class MusicalBoxEdition : MonoBehaviour
 	private bool _isfollowedLeftHand = true;
 	private static bool isNoteInEditing = false;
 
+	public GameObject NoteInEdition
+	{
+		get { return _noteInEdition;  }
+	}
+
 	void Start()
 	{
 		this._handTrackingManager = FindFirstObjectByType<HandTrackingManager>();
