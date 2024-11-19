@@ -143,7 +143,22 @@ public class NoteComponent : MonoBehaviour
 		m_AudioSource.Play();
 	}
 
-	public float GetEndTime()
+    public void Stop()
+    {
+		m_AudioSource.Stop();
+    }
+
+    public void Pause()
+    {
+		m_AudioSource.Pause();
+    }
+
+	public void UnPause()
+	{
+		m_AudioSource.UnPause();
+	}
+
+    public float GetEndTime()
 	{
 		return m_startTime + m_noteDuration;
 	}
