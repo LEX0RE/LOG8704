@@ -19,6 +19,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
     [SerializeField] private MusicalBoxEdition m_MusicalBoxEdition;
     [SerializeField] private HandTrackingManager m_HandTrackingManager;
+    [SerializeField] private GameObject m_UiPanel;
     private enum NoteChoices
     {
         Do,
@@ -40,7 +41,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
         m_FrequencyLabel.text = FormatFloatToString(m_Frequency);
         m_NoteDurationLabel.text = FormatFloatToString(m_NoteDuration);
         m_Parent = this.gameObject.transform.parent.gameObject;
-        m_Parent.SetActive(false);
+        m_UiPanel.SetActive(false);
         m_IsMenuVisible = false;
     }
 
@@ -125,8 +126,8 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 
     public void SetUiPanelVisibility(bool isVisible)
     {
+        m_UiPanel.SetActive(isVisible);
         m_IsMenuVisible = isVisible;
-        m_Parent.SetActive(isVisible);
     }
 
     string FormatFloatToString(float number)
@@ -140,7 +141,8 @@ public class MusicalBoxEditionMenu : MonoBehaviour
         Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
         HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
 
-        m_Parent.transform.position = handTransform.position + new Vector3(0f, 0f, (isLeftHandBeingUsed ? -1 : 1) * 2f);
-        m_Parent.transform.rotation = handTransform.rotation;
+        m_Parent.transform.SetPositionAndRotation(
+            handTransform.position + new Vector3(0f, 0f, (isLeftHandBeingUsed ? -1 : 1) * 2f),
+            handTransform.rotation);
     }
 }

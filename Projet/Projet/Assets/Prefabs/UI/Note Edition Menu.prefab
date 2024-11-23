@@ -738,6 +738,7 @@ MonoBehaviour:
   m_NoteDurationLabel: {fileID: 6930180644636955640}
   m_MusicalBoxEdition: {fileID: 0}
   m_HandTrackingManager: {fileID: 0}
+  m_UiPanel: {fileID: 6695490883156787008}
   m_AudioClips: []
 --- !u!1 &8001822410623794008
 GameObject:
