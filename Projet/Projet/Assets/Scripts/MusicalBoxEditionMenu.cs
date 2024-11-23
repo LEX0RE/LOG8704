@@ -162,7 +162,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
 
 		m_Parent.transform.SetPositionAndRotation(
-			handTransform.position, //+ new Vector3(0f, 0f, (isLeftHandBeingUsed ? -1 : 1) * 2f),
-			handTransform.rotation);
+            handTransform.position + new Vector3((isLeftHandBeingUsed ? 0 : -0.2f), 0f, 0f),
+			handTransform.rotation * Quaternion.Euler(0, 90, -180));
 	}
 }
