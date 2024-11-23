@@ -4,145 +4,165 @@ using UnityEngine.XR.Hands;
 
 public class MusicalBoxEditionMenu : MonoBehaviour
 {
-    // TODO faire des prefabs avec un script d�di� pour contr�ler les valeurs
-    // affich�es pour la dur�e du son et de la note, ainsi que la fr�quence
-    private NoteChoices m_SelectedNote = NoteChoices.Do;
-    
-    private float m_SoundDuration = 0.5f;
-    private float m_Frequency = 0.5f;
-    private float m_NoteDuration = 0.5f;
-    private GameObject m_Parent;
-    private bool m_IsMenuVisible;
+	// TODO faire des prefabs avec un script d�di� pour contr�ler les valeurs
+	// affich�es pour la dur�e du son et de la note, ainsi que la fr�quence
+	private NoteChoices m_SelectedNote = NoteChoices.Do;
 
-    [SerializeField] private TMPro.TMP_Text m_SoundDurationLabel;
-    [SerializeField] private TMPro.TMP_Text m_FrequencyLabel;
-    [SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
-    [SerializeField] private MusicalBoxEdition m_MusicalBoxEdition;
-    [SerializeField] private HandTrackingManager m_HandTrackingManager;
-    [SerializeField] private GameObject m_UiPanel;
-    private enum NoteChoices
-    {
-        Do,
-        Re,
-        Mi,
-        Fa,
-        Sol,
-        La,
-        Si,
-        End
-    }
+	private float m_SoundDuration = 0.5f;
+	private float m_Frequency = 0.5f;
+	private float m_NoteDuration = 0.5f;
+	private GameObject m_Parent;
+	private bool m_IsMenuVisible;
 
-    public List<AudioClip> m_AudioClips = new List<AudioClip>();
+	[SerializeField] private TMPro.TMP_Text m_SoundDurationLabel;
+	[SerializeField] private TMPro.TMP_Text m_FrequencyLabel;
+	[SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
+	[SerializeField] private GameObject m_UiPanel;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        m_SoundDurationLabel.text = FormatFloatToString(m_SoundDuration);
-        m_FrequencyLabel.text = FormatFloatToString(m_Frequency);
-        m_NoteDurationLabel.text = FormatFloatToString(m_NoteDuration);
-        m_Parent = this.gameObject.transform.parent.gameObject;
-        m_UiPanel.SetActive(false);
-        m_IsMenuVisible = false;
-    }
+	private MusicalBoxEdition m_MusicalBoxEdition;
+	private HandTrackingManager m_HandTrackingManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (m_IsMenuVisible)
-        {
-            UpdateMenuPosition();
-        }
-    }
+	private enum NoteChoices
+	{
+		Do,
+		Re,
+		Mi,
+		Fa,
+		Sol,
+		La,
+		Si,
+		End
+	}
 
-    public void SelectNote(int indexSelection)
-    {
-        m_SelectedNote = (NoteChoices)indexSelection;
-        
-        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
-        note.Sound = m_AudioClips[indexSelection];
-    }
+	public List<AudioClip> m_AudioClips = new List<AudioClip>();
 
-    public void IncrementSoundDuration()
-    {
-        m_SoundDuration += 0.5f;
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
+	{
+		this.m_MusicalBoxEdition = FindFirstObjectByType<MusicalBoxEdition>();
+		if (this.m_MusicalBoxEdition == null)
+		{
+			Debug.LogError("Could not find MusicalBoxEdition");
+			enabled = false;
+			return;
+		}
 
-        m_SoundDuration = Mathf.Min(Mathf.Max(0, m_SoundDuration), 1000);
-        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+		this.m_HandTrackingManager = FindFirstObjectByType<HandTrackingManager>();
+		if (this.m_HandTrackingManager == null)
+		{
+			Debug.LogError("Could not find HandTrackingManager");
+			enabled = false;
+			return;
+		}
 
-        note.NoteDuration = m_SoundDuration;
-        m_SoundDurationLabel.text = m_SoundDuration.ToString();
-    }
+		m_SoundDurationLabel.text = FormatFloatToString(m_SoundDuration);
+		m_FrequencyLabel.text = FormatFloatToString(m_Frequency);
+		m_NoteDurationLabel.text = FormatFloatToString(m_NoteDuration);
+		m_Parent = this.gameObject.transform.parent.gameObject;
+		m_UiPanel.SetActive(false);
+		m_IsMenuVisible = false;
+	}
 
-    public void DecrementSoundDuration()
-    {
-         m_SoundDuration -= 0.5f;
-         m_SoundDuration = Mathf.Min(Mathf.Max(0, m_SoundDuration), 1000);
-         var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
- 
-         note.NoteDuration = m_SoundDuration;
-         m_SoundDurationLabel.text = m_SoundDuration.ToString();       
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		if (m_IsMenuVisible)
+		{
+			UpdateMenuPosition();
+		}
+	}
 
-    public void IncrementFrequency()
-    {
-        m_Frequency += 0.5f;
-        m_Frequency = Mathf.Min(Mathf.Max(0, m_Frequency), 1000);
-        
-        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
-         
-        note.Frequency = m_Frequency;
-        m_FrequencyLabel.text = m_Frequency.ToString();
-    }
+	public void SelectNote(int indexSelection)
+	{
+		m_SelectedNote = (NoteChoices)indexSelection;
 
-    public void DecrementFrequency()
-    {
-        m_Frequency -= 0.5f;
-        m_Frequency = Mathf.Min(Mathf.Max(0, m_Frequency), 1000);
-        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
-         
-        note.Frequency = m_Frequency;
-        m_FrequencyLabel.text = m_Frequency.ToString();
-    }
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+		note.Sound = m_AudioClips[indexSelection];
+	}
 
-    public void IncrementNoteDuration()
-    {
-        m_NoteDuration += 0.5f;
-        m_NoteDuration = Mathf.Min(Mathf.Max(0, m_NoteDuration), 1000);
-        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
-        note.NoteDuration = m_NoteDuration;
+	public void IncrementSoundDuration()
+	{
+		m_SoundDuration += 0.5f;
 
-        m_NoteDurationLabel.text = m_NoteDuration.ToString();
-    }
+		m_SoundDuration = Mathf.Min(Mathf.Max(0, m_SoundDuration), 1000);
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
 
-    public void DecrementNoteDuration()
-    {
-        m_NoteDuration -= 0.5f;
-        m_NoteDuration = Mathf.Min(Mathf.Max(0, m_NoteDuration), 1000);
-        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
-        note.NoteDuration = m_NoteDuration;
-        
-        m_NoteDurationLabel.text = m_NoteDuration.ToString();
-    }
+		note.NoteDuration = m_SoundDuration;
+		m_SoundDurationLabel.text = m_SoundDuration.ToString();
+	}
 
-    public void SetUiPanelVisibility(bool isVisible)
-    {
-        m_UiPanel.SetActive(isVisible);
-        m_IsMenuVisible = isVisible;
-    }
+	public void DecrementSoundDuration()
+	{
+		m_SoundDuration -= 0.5f;
+		m_SoundDuration = Mathf.Min(Mathf.Max(0, m_SoundDuration), 1000);
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
 
-    string FormatFloatToString(float number)
-    {
-        return string.Format("{0:N1}", number);
-    }
+		note.NoteDuration = m_SoundDuration;
+		m_SoundDurationLabel.text = m_SoundDuration.ToString();
+	}
 
-    void UpdateMenuPosition()
-    {
-        bool isLeftHandBeingUsed = m_MusicalBoxEdition.IsFollowedLeftHand;
-        Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
-        HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
+	public void IncrementFrequency()
+	{
+		m_Frequency += 0.5f;
+		m_Frequency = Mathf.Min(Mathf.Max(0, m_Frequency), 1000);
 
-        m_Parent.transform.SetPositionAndRotation(
-            handTransform.position + new Vector3(0f, 0f, (isLeftHandBeingUsed ? -1 : 1) * 2f),
-            handTransform.rotation);
-    }
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+
+		note.Frequency = m_Frequency;
+		m_FrequencyLabel.text = m_Frequency.ToString();
+	}
+
+	public void DecrementFrequency()
+	{
+		m_Frequency -= 0.5f;
+		m_Frequency = Mathf.Min(Mathf.Max(0, m_Frequency), 1000);
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+
+		note.Frequency = m_Frequency;
+		m_FrequencyLabel.text = m_Frequency.ToString();
+	}
+
+	public void IncrementNoteDuration()
+	{
+		m_NoteDuration += 0.5f;
+		m_NoteDuration = Mathf.Min(Mathf.Max(0, m_NoteDuration), 1000);
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+		note.NoteDuration = m_NoteDuration;
+
+		m_NoteDurationLabel.text = m_NoteDuration.ToString();
+	}
+
+	public void DecrementNoteDuration()
+	{
+		m_NoteDuration -= 0.5f;
+		m_NoteDuration = Mathf.Min(Mathf.Max(0, m_NoteDuration), 1000);
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+		note.NoteDuration = m_NoteDuration;
+
+		m_NoteDurationLabel.text = m_NoteDuration.ToString();
+	}
+
+	public void SetUiPanelVisibility(bool isVisible)
+	{
+		Debug.Log("SetUiPanelVisibility: isVisible -> " + isVisible);
+		m_UiPanel.SetActive(isVisible);
+		m_IsMenuVisible = isVisible;
+	}
+
+	string FormatFloatToString(float number)
+	{
+		return string.Format("{0:N1}", number);
+	}
+
+	void UpdateMenuPosition()
+	{
+		Debug.Log("UpdateMenuPosition");
+		bool isLeftHandBeingUsed = m_MusicalBoxEdition.IsFollowedLeftHand;
+		Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
+		HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
+
+		m_Parent.transform.SetPositionAndRotation(
+			handTransform.position, //+ new Vector3(0f, 0f, (isLeftHandBeingUsed ? -1 : 1) * 2f),
+			handTransform.rotation);
+	}
 }
