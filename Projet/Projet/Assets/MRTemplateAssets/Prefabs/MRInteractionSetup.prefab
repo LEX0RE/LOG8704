@@ -580,7 +580,7 @@ MonoBehaviour:
   m_VideoPlayer: {fileID: 0}
   m_VideoPlayerToggle: {fileID: 0}
   m_ARPlaneManager: {fileID: 5497310570242624798}
-  m_ObjectSpawner: {fileID: 3339367952642848919}
+  m_ObjectSpawner: {fileID: 0}
 --- !u!1 &2662485833752745289
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,7 +826,6 @@ Transform:
   - {fileID: 5632266133985503989}
   - {fileID: 1064248136195295827}
   - {fileID: 7419610871887886442}
-  - {fileID: 3918692831784067096}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4009614286898648619
@@ -1212,78 +1211,6 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &6383841202730774034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3918692831784067096}
-  - component: {fileID: 2970068989662574442}
-  - component: {fileID: 3339367952642848919}
-  m_Layer: 0
-  m_Name: Object Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3918692831784067096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383841202730774034}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6391579207171690961}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2970068989662574442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383841202730774034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91d226c518cb4c0cacf828b2e93b7a4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObjectSelectorDropdown: {fileID: 0}
-  m_DestroyObjectsButton: {fileID: 0}
---- !u!114 &3339367952642848919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383841202730774034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 956dd6cf70eaca449a45b6a95b96c8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
-  m_ObjectPrefabs:
-  - {fileID: 5765088748426752163, guid: 7905da53b462883428142bc5e46defb2, type: 3}
-  - {fileID: 1667034717825686887, guid: 694c0248895d1024fbf819260b222c1e, type: 3}
-  - {fileID: 4998762802436478141, guid: c91164437053b8c4292f18f8e3502896, type: 3}
-  - {fileID: 8296084503836613672, guid: d88f78aa5ae6bd3468af8bb24cce04c7, type: 3}
-  m_SpawnVisualizationPrefab: {fileID: 1882492882186723134, guid: dee56e90383dc594393798dea96faedc, type: 3}
-  m_SpawnOptionIndex: -1
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0.2
-  m_ApplyRandomAngleAtSpawn: 0
-  m_SpawnAngleRange: 45
-  m_SpawnAsChildren: 1
 --- !u!1 &6660900155203182598
 GameObject:
   m_ObjectHideFlags: 0
