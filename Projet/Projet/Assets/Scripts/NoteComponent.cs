@@ -3,12 +3,26 @@ using UnityEngine;
 
 public class NoteComponent : MonoBehaviour
 {
+	[SerializeField]
 	private AudioClip m_Sound;
+
+	[SerializeField]
 	private float m_SoundDuration;
+
+	[SerializeField]
 	private float m_Frequency = 1.0f;
-	private float m_Volume;
+
+	[SerializeField]
+	private float m_Volume = 1.0f;
+
+	[SerializeField]
 	private float m_startTime = 1.0f;
+
+	[SerializeField]
 	private float m_noteDuration = 8.0f;
+
+	[SerializeField]
+	private float m_colorFlashingTime = 0.25f;
 
 	private bool m_isActive;
 
@@ -16,6 +30,7 @@ public class NoteComponent : MonoBehaviour
 	private AudioSource m_AudioSource;
 
 	private Color m_flashingColor = Color.blue;
+	private float lastPlayingSound;
 
 	//Getter and Setter
 	public AudioClip Sound
@@ -69,8 +84,7 @@ public class NoteComponent : MonoBehaviour
 	public void OnSetup()
 	{
 		m_AudioSource = gameObject.AddComponent<AudioSource>();
-		m_AudioSource.clip = m_Sound;
-		m_AudioSource.time = m_SoundDuration;
+		this.UpdateFromData();
 
 		this.m_musicManager = FindFirstObjectByType<MusicManager>();
 		if (this.m_musicManager == null)
@@ -80,7 +94,26 @@ public class NoteComponent : MonoBehaviour
 			return;
 		}
 
+		this.lastPlayingSound = -1.0f;
+
 		RegisterToManager();
+	}
+
+	public void Update()
+	{
+		float diff = Time.time - this.lastPlayingSound;
+		if (Math.Abs(diff) < this.m_colorFlashingTime)
+		{
+			Color baseColor = this.m_isActive ? Color.green : Color.grey;
+			Color fromColor = baseColor;
+			Color toColor = baseColor;
+
+			if (diff > 0) fromColor = Color.blue;
+			else toColor = Color.blue;
+
+			float t = Math.Abs(diff) / this.m_colorFlashingTime;
+			SetColor(Color.Lerp(fromColor, toColor, diff > 0 ? t : 1 - t));
+		}
 	}
 
 	private void OnDestroy()
@@ -106,11 +139,26 @@ public class NoteComponent : MonoBehaviour
 
 	public void Play()
 	{
+		this.lastPlayingSound = Time.time;
 		m_AudioSource.Play();
-		Debug.Log("PLAY NOTE");
 	}
 
-	public float GetEndTime()
+    public void Stop()
+    {
+		m_AudioSource.Stop();
+    }
+
+    public void Pause()
+    {
+		m_AudioSource.Pause();
+    }
+
+	public void UnPause()
+	{
+		m_AudioSource.UnPause();
+	}
+
+    public float GetEndTime()
 	{
 		return m_startTime + m_noteDuration;
 	}
@@ -139,5 +187,15 @@ public class NoteComponent : MonoBehaviour
 	public void SetColor(Color color)
 	{
 		GetComponent<MeshRenderer>().material.color = color;
+	}
+
+	private void UpdateFromData()
+	{
+		m_AudioSource.clip = m_Sound;
+		m_AudioSource.time = m_SoundDuration;
+		m_AudioSource.volume = m_Volume;
+
+		if (this.m_isActive) this.SetColor(Color.green);
+		else this.SetColor(Color.grey);
 	}
 }
