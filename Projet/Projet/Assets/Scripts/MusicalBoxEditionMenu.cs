@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Hands;
 
 public class MusicalBoxEditionMenu : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class MusicalBoxEditionMenu : MonoBehaviour
     private float m_SoundDuration = 0.5f;
     private float m_Frequency = 0.5f;
     private float m_NoteDuration = 0.5f;
+    private GameObject m_Parent;
+    private bool m_IsMenuVisible;
+
     [SerializeField] private TMPro.TMP_Text m_SoundDurationLabel;
     [SerializeField] private TMPro.TMP_Text m_FrequencyLabel;
     [SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
-
     [SerializeField] private MusicalBoxEdition m_MusicalBoxEdition;
+    [SerializeField] private HandTrackingManager m_HandTrackingManager;
     private enum NoteChoices
     {
         Do,
@@ -35,12 +39,18 @@ public class MusicalBoxEditionMenu : MonoBehaviour
         m_SoundDurationLabel.text = FormatFloatToString(m_SoundDuration);
         m_FrequencyLabel.text = FormatFloatToString(m_Frequency);
         m_NoteDurationLabel.text = FormatFloatToString(m_NoteDuration);
+        m_Parent = this.gameObject.transform.parent.gameObject;
+        m_Parent.SetActive(false);
+        m_IsMenuVisible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (m_IsMenuVisible)
+        {
+            UpdateMenuPosition();
+        }
     }
 
     public void SelectNote(int indexSelection)
@@ -113,8 +123,24 @@ public class MusicalBoxEditionMenu : MonoBehaviour
         m_NoteDurationLabel.text = m_NoteDuration.ToString();
     }
 
+    public void SetUiPanelVisibility(bool isVisible)
+    {
+        m_IsMenuVisible = isVisible;
+        m_Parent.SetActive(isVisible);
+    }
+
     string FormatFloatToString(float number)
     {
         return string.Format("{0:N1}", number);
+    }
+
+    void UpdateMenuPosition()
+    {
+        bool isLeftHandBeingUsed = m_MusicalBoxEdition.IsFollowedLeftHand;
+        Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
+        HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
+
+        m_Parent.transform.position = handTransform.position + new Vector3(0f, 0f, (isLeftHandBeingUsed ? -1 : 1) * 2f);
+        m_Parent.transform.rotation = handTransform.rotation;
     }
 }
