@@ -17,12 +17,12 @@ public class MusicalBoxEdition : MonoBehaviour
 	private float _noteEditionHeight = 0.1f;
 
 	[SerializeField]
-    private UnityEvent _editionStartedEvent;
+	private UnityEvent _editionStartedEvent;
 
 	[SerializeField]
 	private UnityEvent _editionEndedEvent;
 
-    private MusicManager _musicManager;
+	private MusicManager _musicManager;
 	private HandTrackingManager _handTrackingManager;
 
 	private GameObject _noteInEdition;
@@ -31,7 +31,7 @@ public class MusicalBoxEdition : MonoBehaviour
 
 	public GameObject NoteInEdition
 	{
-		get { return _noteInEdition;  }
+		get { return _noteInEdition; }
 	}
 
 	public bool IsFollowedLeftHand
@@ -79,8 +79,8 @@ public class MusicalBoxEdition : MonoBehaviour
 
 			this._noteInEdition = grabbedNote;
 			this._noteInEdition.GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnEndCreation);
-            _editionStartedEvent.Invoke();
-        }
+			_editionStartedEvent.Invoke();
+		}
 	}
 
 	public void DestroyNote(bool isLeftHand)
@@ -93,8 +93,8 @@ public class MusicalBoxEdition : MonoBehaviour
 
 			Destroy(this._noteInEdition);
 			this._noteInEdition = null;
-            _editionEndedEvent.Invoke();
-        }
+			_editionEndedEvent.Invoke();
+		}
 	}
 
 	void Update()
@@ -106,6 +106,7 @@ public class MusicalBoxEdition : MonoBehaviour
 			if (handTransform != null)
 			{
 				handTransform.position.y += this._noteEditionHeight;
+				Debug.Log(handTransform);
 
 				this._noteInEdition.transform.position = handTransform.position;
 				this._noteInEdition.transform.rotation = handTransform.rotation;
