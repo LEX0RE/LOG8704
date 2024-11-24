@@ -14,6 +14,25 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	private GameObject m_Parent;
 	private bool m_IsMenuVisible;
 
+	private bool IsMenuVisible
+	{
+		get
+		{
+			return m_IsMenuVisible;
+		}
+
+		set
+		{
+			//From off to on
+			if (!m_IsMenuVisible && value)
+			{
+				UpdateMenuLabel();
+			}
+
+			m_IsMenuVisible = value;
+		}
+	}
+
 	[SerializeField] private TMPro.TMP_Text m_SoundDurationLabel;
 	[SerializeField] private TMPro.TMP_Text m_FrequencyLabel;
 	[SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
@@ -60,16 +79,29 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		m_NoteDurationLabel.text = FormatFloatToString(m_NoteDuration);
 		m_Parent = this.gameObject.transform.parent.gameObject;
 		m_UiPanel.SetActive(false);
-		m_IsMenuVisible = false;
+		IsMenuVisible = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (m_IsMenuVisible)
+		if (IsMenuVisible)
 		{
 			UpdateMenuPosition();
 		}
+	}
+
+	private void UpdateMenuLabel()
+	{
+		
+		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+		m_SoundDuration = note.SoundDuration;
+		m_Frequency = note.Frequency;
+		m_NoteDuration = note.NoteDuration;
+		
+		m_SoundDurationLabel.text = m_SoundDuration.ToString();
+		m_FrequencyLabel.text = m_Frequency.ToString();
+		m_NoteDurationLabel.text = m_NoteDuration.ToString();
 	}
 
 	public void SelectNote(int indexSelection)
@@ -146,7 +178,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	{
 		Debug.Log("SetUiPanelVisibility: isVisible -> " + isVisible);
 		m_UiPanel.SetActive(isVisible);
-		m_IsMenuVisible = isVisible;
+		IsMenuVisible = isVisible;
 	}
 
 	string FormatFloatToString(float number)
