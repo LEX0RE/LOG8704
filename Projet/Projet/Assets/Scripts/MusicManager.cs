@@ -53,7 +53,7 @@ public class MusicManager : MonoBehaviour
 
 	public void StopMusic()
 	{
-		if (m_beatCoroutine != null)
+        if (m_beatCoroutine != null)
 		{
 			StopCoroutine(PlayNotes());
 			m_beatCoroutine = null;
@@ -66,6 +66,7 @@ public class MusicManager : MonoBehaviour
 
         m_elapsedTime = 0;
 		m_isPlaying = false;
+        m_time = 0.5f;
     }
 
 	public void PauseMusic()
@@ -80,7 +81,7 @@ public class MusicManager : MonoBehaviour
 
 	public void UnPauseMusic()
 	{
-		m_isPlaying = true;
+        m_isPlaying = true;
 
         foreach (NoteComponent note in m_MusicalBoxes)
         {
