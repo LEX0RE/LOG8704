@@ -84,6 +84,7 @@ public class NoteComponent : MonoBehaviour
 	public void OnSetup()
 	{
 		m_AudioSource = gameObject.AddComponent<AudioSource>();
+		m_AudioSource.spatialBlend = 1;
 		this.UpdateFromData();
 
 		this.m_musicManager = FindFirstObjectByType<MusicManager>();
