@@ -146,7 +146,8 @@ public class NoteComponent : MonoBehaviour
 
     public void Stop()
     {
-		m_AudioSource.Stop();
+        this.SetColor(Color.grey);
+        m_AudioSource.Stop();
     }
 
     public void Pause()
@@ -171,12 +172,12 @@ public class NoteComponent : MonoBehaviour
 
 	public bool CheckActiveStatus(float time)
 	{
-		if (m_isActive && (time < m_startTime || time > GetEndTime()))
+		if (m_isActive && (time < m_startTime || time >= GetEndTime()))
 		{
 			this.SetColor(Color.grey);
 			m_isActive = false;
 		}
-		else if (!m_isActive && time >= m_startTime && time <= GetEndTime())
+		else if (!m_isActive && time >= m_startTime && time < GetEndTime())
 		{
 			this.SetColor(Color.green);
 			m_isActive = true;
