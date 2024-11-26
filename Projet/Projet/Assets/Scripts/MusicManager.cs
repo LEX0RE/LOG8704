@@ -1,16 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-	private int m_bpm = 60;
+    private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
 
-	private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
+    private int m_bpm = 60;
 
     private float m_halfTimeInSecond;
 	private float m_elapsedTime = 0.0f;
     private float m_time = 0.5f;
+    private float m_lastTime = 1.0f;
+	private float m_WaitTimeBetweenLoop = 5.0f; // seconds
 
     private bool m_isPlaying = false;
 
@@ -46,6 +47,13 @@ public class MusicManager : MonoBehaviour
                 }
 
 				m_elapsedTime = 0.0f;
+
+				float bpmForWaitTime = m_WaitTimeBetweenLoop / (60.0f / (float)m_bpm);
+
+				if (m_time >= m_lastTime + bpmForWaitTime)
+				{
+					m_time = 0.5f;
+				}
             }
 		}
 	}
@@ -57,14 +65,21 @@ public class MusicManager : MonoBehaviour
 
 	public void IncrementBpm()
 	{
-		int newBpm = m_bpm + 5;
-		SetBpm(newBpm);
+		if (!m_isPlaying)
+		{
+			int newBpm = m_bpm + 5;
+			SetBpm(newBpm);
+		}
+		
 	}
 
 	public void DecrementBpm()
 	{
-		int newBpm = m_bpm - 5;
-		SetBpm(newBpm);
+		if (!m_isPlaying)
+		{
+            int newBpm = m_bpm - 5;
+            SetBpm(newBpm);
+        }
 	}
 
 	public void StartMusic()
@@ -105,6 +120,13 @@ public class MusicManager : MonoBehaviour
 
 	public void RegisterNote(NoteComponent newNote)
 	{
+		float newNoteEndTime = newNote.GetEndTime();
+
+        if (newNoteEndTime > m_lastTime)
+		{
+			m_lastTime = newNoteEndTime;
+		}
+
 		m_MusicalBoxes.Add(newNote);
 	}
 
