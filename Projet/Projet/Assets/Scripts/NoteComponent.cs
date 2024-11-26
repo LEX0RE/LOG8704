@@ -15,7 +15,7 @@ public enum NoteChoices
 	La,
 	La_d,
 	Si,
-	End // TODO : Recheck pourquoi ici on a besoin d'un End ?
+	End
 }
 
 public class NoteComponent : MonoBehaviour
@@ -68,7 +68,10 @@ public class NoteComponent : MonoBehaviour
 			this.m_baseColor = this.GetNoteTypeColor();
 
 			Color.RGBToHSV(this.m_baseColor, out float h, out float s, out float v);
-			this.m_disabledColor = Color.HSVToRGB(h, 25f, 50f);
+
+			this.m_disabledColor = Color.HSVToRGB(h, s * 0.5f, v * 0.5f);
+
+			this.UpdateColor();
 		}
 	}
 
@@ -126,10 +129,6 @@ public class NoteComponent : MonoBehaviour
 
 	public void OnSetup()
 	{
-		m_AudioSource = gameObject.AddComponent<AudioSource>();
-		m_AudioSource.spatialBlend = 1;
-		this.UpdateFromData();
-
 		this.m_musicManager = FindFirstObjectByType<MusicManager>();
 		if (this.m_musicManager == null)
 		{
@@ -137,6 +136,10 @@ public class NoteComponent : MonoBehaviour
 			enabled = false;
 			return;
 		}
+
+		m_AudioSource = gameObject.AddComponent<AudioSource>();
+		m_AudioSource.spatialBlend = 1;
+		this.UpdateFromData();
 
 		this.m_baseColor = this.GetNoteTypeColor();
 
@@ -162,9 +165,9 @@ public class NoteComponent : MonoBehaviour
 		}
 	}
 
-	private void OnDestroy()
+	public void OnDestroy()
 	{
-		UnregisterToManager();
+		this.UnregisterToManager();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -184,6 +187,7 @@ public class NoteComponent : MonoBehaviour
 
 	public void Play()
 	{
+		this.SetColor(this.m_baseColor);
 		lastPlayingSound = Time.time;
 		float audioClipEndTime = 60.0f / m_musicManager.GetBpm() * SoundDuration;
 		m_AudioSource.Play();
@@ -192,17 +196,28 @@ public class NoteComponent : MonoBehaviour
 
 	public void Stop()
 	{
-		this.SetColor(this.m_disabledColor);
+		this.m_isActive = false;
+
+		this.UpdateColor();
+
 		m_AudioSource.Stop();
 	}
 
 	public void Pause()
 	{
+		this.m_isActive = false;
+
+		this.UpdateColor();
+
 		m_AudioSource.Pause();
 	}
 
 	public void UnPause()
 	{
+		this.m_isActive = true;
+
+		this.UpdateColor();
+
 		m_AudioSource.UnPause();
 	}
 
@@ -211,40 +226,41 @@ public class NoteComponent : MonoBehaviour
 		return m_startTime + m_noteDuration;
 	}
 
-	public bool GetIsActive()
-	{
-		return m_isActive;
-	}
-
 	public bool CheckActiveStatus(float time)
 	{
 		if (m_isActive && (time < m_startTime || time >= GetEndTime()))
 		{
-			this.SetColor(this.m_disabledColor);
 			m_isActive = false;
 		}
 		else if (!m_isActive && time >= m_startTime && time < GetEndTime())
 		{
-			this.SetColor(this.m_baseColor);
 			m_isActive = true;
 		}
+
+		this.UpdateColor();
 
 		return m_isActive;
 	}
 
-	public void SetColor(Color color)
+	private void UpdateColor()
+	{
+		if (this.m_isActive) this.SetColor(this.m_baseColor);
+		else this.SetColor(this.m_disabledColor);
+	}
+
+	private void SetColor(Color color)
 	{
 		GetComponent<MeshRenderer>().material.color = color;
 	}
 
 	private void UpdateFromData()
 	{
-		m_AudioSource.clip = m_Sound;
-		m_AudioSource.time = m_SoundDuration;
-		m_AudioSource.volume = m_Volume;
-
-		if (this.m_isActive) this.SetColor(this.GetNoteTypeColor());
-		else this.SetColor(this.m_disabledColor);
+		this.Note = this.m_Note;
+		this.Sound = this.m_Sound;
+		this.SoundDuration = this.m_SoundDuration;
+		this.Volume = this.m_Volume;
+		this.StartTime = this.m_startTime;
+		this.NoteDuration = this.m_noteDuration;
 	}
 
 	private Color GetNoteTypeColor()
@@ -263,7 +279,7 @@ public class NoteComponent : MonoBehaviour
 			case NoteChoices.La: return new Color(255, 99, 0);
 			case NoteChoices.La_d: return new Color(255, 236, 0);
 			case NoteChoices.Si: return new Color(153, 255, 0);
-			default: return Color.green;
+			default: return Color.grey;
 		};
 	}
 }

@@ -123,9 +123,17 @@ public class MusicManager : MonoBehaviour
 
 	public void RegisterNote(NoteComponent newNote)
 	{
+
+		bool needStartMusic = this.m_MusicalBoxes.Count == 0 && !this.m_isPlaying;
+
 		m_MusicalBoxes.Add(newNote);
 
 		this.UpdateEndMusicTime();
+
+		if (needStartMusic)
+		{
+			this.StartMusic();
+		}
 	}
 
 	public void UnregisterNote(NoteComponent noteToUnregister)
@@ -133,6 +141,11 @@ public class MusicManager : MonoBehaviour
 		m_MusicalBoxes.Remove(noteToUnregister);
 
 		this.UpdateEndMusicTime();
+
+		if (this.m_MusicalBoxes.Count == 0 && this.m_isPlaying)
+		{
+			this.StopMusic();
+		}
 	}
 
 	public List<NoteComponent> Notes
