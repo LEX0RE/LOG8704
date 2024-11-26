@@ -109,7 +109,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	{
 		m_SoundDuration += 0.5f;
 
-		m_SoundDuration = Mathf.Min(Mathf.Max(0, m_SoundDuration), m_Frequency);
+		m_SoundDuration = Mathf.Min(Mathf.Max(0.5f, m_SoundDuration), m_Frequency);
 		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
 
 		note.SoundDuration = m_SoundDuration;
@@ -119,7 +119,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	public void DecrementSoundDuration()
 	{
 		m_SoundDuration -= 0.5f;
-		m_SoundDuration = Mathf.Min(Mathf.Max(0, m_SoundDuration), m_Frequency);
+		m_SoundDuration = Mathf.Min(Mathf.Max(0.5f, m_SoundDuration), m_Frequency);
 		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
 
 		note.SoundDuration = m_SoundDuration;
