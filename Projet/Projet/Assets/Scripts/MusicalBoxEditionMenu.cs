@@ -13,6 +13,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	private float m_StartTime = 1.0f;
 
 	private GameObject m_Parent;
+	private Vector3 m_offsetTranslation;
 	private bool m_IsMenuVisible;
 
 	private bool IsMenuVisible
@@ -209,12 +210,18 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		bool isLeftHandBeingUsed = m_MusicalBoxEdition.IsFollowedLeftHand;
 		Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
 		HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
-
-		if (handTransform != null)
+		
+		if (isLeftHandBeingUsed)
 		{
-			m_Parent.transform.SetPositionAndRotation(
-				handTransform.position + new Vector3(isLeftHandBeingUsed ? 0 : -0.2f, 0f, 0f),
-				handTransform.rotation * Quaternion.Euler(0, 90, -180));
-		}
+            m_offsetTranslation = Vector3.zero;
+        }
+        else
+        {
+            m_offsetTranslation = 0.2f * (handTransform.rotation * Vector3.right);
+        }
+
+        m_Parent.transform.SetPositionAndRotation(
+			handTransform.position + m_offsetTranslation,
+			handTransform.rotation * Quaternion.Euler(0, 90, -180));
 	}
 }
