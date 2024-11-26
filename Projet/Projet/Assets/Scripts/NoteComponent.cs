@@ -85,11 +85,7 @@ public class NoteComponent : MonoBehaviour
 	public float SoundDuration
 	{
 		get { return m_SoundDuration; }
-		set
-		{
-			m_SoundDuration = value;
-			// m_AudioSource.time = m_SoundDuration;
-		}
+		set { m_SoundDuration = value; }
 	}
 
 	public float Frequency
@@ -111,13 +107,21 @@ public class NoteComponent : MonoBehaviour
 	public float StartTime
 	{
 		get { return m_startTime; }
-		set { m_startTime = value; }
+		set
+		{
+			m_startTime = value;
+			this.m_musicManager.UpdateEndMusicTime();
+		}
 	}
 
 	public float NoteDuration
 	{
 		get { return m_noteDuration; }
-		set { m_noteDuration = value; }
+		set
+		{
+			m_noteDuration = value;
+			this.m_musicManager.UpdateEndMusicTime();
+		}
 	}
 
 	public void OnSetup()
@@ -133,6 +137,8 @@ public class NoteComponent : MonoBehaviour
 			enabled = false;
 			return;
 		}
+
+		this.m_baseColor = this.GetNoteTypeColor();
 
 		this.lastPlayingSound = -1.0f;
 
@@ -179,9 +185,9 @@ public class NoteComponent : MonoBehaviour
 	public void Play()
 	{
 		lastPlayingSound = Time.time;
-		float audioClipEndTime = (60.0f / m_musicManager.GetBpm()) * SoundDuration;
+		float audioClipEndTime = 60.0f / m_musicManager.GetBpm() * SoundDuration;
 		m_AudioSource.Play();
-		m_AudioSource.SetScheduledEndTime(AudioSettings.dspTime+(audioClipEndTime));
+		m_AudioSource.SetScheduledEndTime(AudioSettings.dspTime + audioClipEndTime);
 	}
 
 	public void Stop()
