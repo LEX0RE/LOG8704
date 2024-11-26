@@ -37,6 +37,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	[SerializeField] private TMPro.TMP_Text m_FrequencyLabel;
 	[SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
 	[SerializeField] private GameObject m_UiPanel;
+	[SerializeField] private TMPro.TMP_Dropdown m_NoteSelectionLabel;
 
 	private MusicalBoxEdition m_MusicalBoxEdition;
 	private HandTrackingManager m_HandTrackingManager;
@@ -84,6 +85,8 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	{
 
 		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+
+		m_NoteSelectionLabel.value = (int)note.Note;
 		m_SoundDuration = note.SoundDuration;
 		m_Frequency = note.Frequency;
 		m_NoteDuration = note.NoteDuration;

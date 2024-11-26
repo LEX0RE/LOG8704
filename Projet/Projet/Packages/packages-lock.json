@@ -240,6 +240,14 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.textmeshpro": {
+      "version": "5.0.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      }
+    },
     "com.unity.ugui": {
       "version": "2.0.0",
       "depth": 1,
@@ -381,6 +389,15 @@
         "com.unity.xr.legacyinputhelpers": "2.1.2"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.volorf.vr-notifications": {
+      "version": "https://github.com/Volorf/VR-Notifications.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "3bfb0a5a76a7cf6b8be3e630124abdfe7f4e134a"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

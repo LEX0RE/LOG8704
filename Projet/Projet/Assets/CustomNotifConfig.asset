@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682d1631f29fd4da4b29b40a6a12ee1e, type: 3}
+  m_Name: CustomNotifConfig
+  m_EditorClassIdentifier: 
+  defaultDuration: 3
+  checkingFrequency: 1
+  distanceFromHead: 1
+  IsOffsetRelative: 1
+  downOffset: 0.3
+  toShowDuration: 0.5
+  showCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  toHideDuration: 0.3
+  hideCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  FollowHead: 1
+  followHeadSmoothKoef: 0.5
+  lookAtHeadSmoothKoef: 0.5
+  defaultNotificationStyle:
+    backgroundColor: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
+    messageColor: {r: 1, g: 1, b: 1, a: 1}
+  warningNotificationStyle:
+    backgroundColor: {r: 1, g: 0.70460516, b: 0.3176471, a: 1}
+    messageColor: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
+  errorNotificationStyle:
+    backgroundColor: {r: 1, g: 0.19607842, b: 0.3078231, a: 1}
+    messageColor: {r: 1, g: 1, b: 1, a: 1}
+  showWelcomeMessageAtStart: 0
+  printDebugMessages: 0
