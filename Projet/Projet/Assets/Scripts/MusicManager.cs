@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-	public int m_bpm = 60;
+	private int m_bpm = 60;
 
 	private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
 
@@ -55,13 +55,16 @@ public class MusicManager : MonoBehaviour
 		return m_bpm;
 	}
 
-	public void SetBpm(int newBpm)
+	public void IncrementBpm()
 	{
-		if (newBpm >= 40 && newBpm <= 280)
-		{
-			m_bpm = newBpm;
-			m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
-		}
+		int newBpm = m_bpm + 5;
+		SetBpm(newBpm);
+	}
+
+	public void DecrementBpm()
+	{
+		int newBpm = m_bpm - 5;
+		SetBpm(newBpm);
 	}
 
 	public void StartMusic()
@@ -123,5 +126,14 @@ public class MusicManager : MonoBehaviour
         m_isPlaying = false;
         m_time = 0.5f;
         m_elapsedTime = 0.0f;
+    }
+
+    private void SetBpm(int newBpm)
+    {
+        if (newBpm >= 40 && newBpm <= 280)
+        {
+            m_bpm = newBpm;
+            m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
+        }
     }
 }

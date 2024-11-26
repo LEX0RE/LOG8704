@@ -1017,7 +1017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7155299373703105718, guid: 0422e5d9862407c47bf2563d21a04ddf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DecrementSoundDuration
+      value: IncrementSoundDuration
       objectReference: {fileID: 0}
     - target: {fileID: 7155299373703105718, guid: 0422e5d9862407c47bf2563d21a04ddf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1713,7 +1713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7155299373703105718, guid: 0422e5d9862407c47bf2563d21a04ddf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DecrementNoteDuration
+      value: IncrementNoteDuration
       objectReference: {fileID: 0}
     - target: {fileID: 7155299373703105718, guid: 0422e5d9862407c47bf2563d21a04ddf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

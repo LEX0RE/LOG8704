@@ -197,3 +197,45 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
       handToDetect: 2
+    - handPose: {fileID: 11400000, guid: 3a3a0d45621f98a4daebb7304139c969, type: 2}
+      minimumHoldTime: 0.5
+      posePerformedEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: MusicalBoxEdition, Assembly-CSharp
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      poseEndedEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      handToDetect: 1
+    - handPose: {fileID: 11400000, guid: 3a3a0d45621f98a4daebb7304139c969, type: 2}
+      minimumHoldTime: 0.5
+      posePerformedEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: MusicalBoxEdition, Assembly-CSharp
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      poseEndedEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      handToDetect: 2

@@ -179,8 +179,9 @@ public class NoteComponent : MonoBehaviour
 	public void Play()
 	{
 		lastPlayingSound = Time.time;
+		float audioClipEndTime = (60.0f / m_musicManager.GetBpm()) * SoundDuration;
 		m_AudioSource.Play();
-		m_AudioSource.SetScheduledEndTime(AudioSettings.dspTime+(SoundDuration));
+		m_AudioSource.SetScheduledEndTime(AudioSettings.dspTime+(audioClipEndTime));
 	}
 
 	public void Stop()
