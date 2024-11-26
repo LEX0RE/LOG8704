@@ -133,6 +133,14 @@ public class NoteComponent : MonoBehaviour
 			return;
 		}
 
+		m_grabInteractable = GetComponent<XRGrabInteractable>();
+		if (this.m_grabInteractable == null)
+		{
+			Debug.LogError("Could not find XRGrabInteractable");
+			enabled = false;
+			return;
+		}
+
 		m_AudioSource = gameObject.AddComponent<AudioSource>();
 		m_AudioSource.spatialBlend = 1;
 		this.UpdateFromData();
@@ -164,7 +172,6 @@ public class NoteComponent : MonoBehaviour
 		}
 
 		//Give some time after releasing the grab in order to tap the note
-		float delayBeforeTapping = 0.5f;
 		if (isSelected && !m_grabInteractable.isSelected)
 		{
 			//Coroutine here
@@ -304,9 +311,5 @@ public class NoteComponent : MonoBehaviour
 			case NoteChoices.Si: return new Color(153, 255, 0);
 			default: return Color.grey;
 		};
-	}
-	private void Start()
-	{
-		m_grabInteractable = GetComponent<XRGrabInteractable>();
 	}
 }
