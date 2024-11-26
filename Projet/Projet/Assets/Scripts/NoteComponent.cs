@@ -88,7 +88,7 @@ public class NoteComponent : MonoBehaviour
 		set
 		{
 			m_SoundDuration = value;
-			m_AudioSource.time = m_SoundDuration;
+			// m_AudioSource.time = m_SoundDuration;
 		}
 	}
 
@@ -178,8 +178,9 @@ public class NoteComponent : MonoBehaviour
 
 	public void Play()
 	{
-		this.lastPlayingSound = Time.time;
+		lastPlayingSound = Time.time;
 		m_AudioSource.Play();
+		m_AudioSource.SetScheduledEndTime(AudioSettings.dspTime+(SoundDuration));
 	}
 
 	public void Stop()
