@@ -16,7 +16,7 @@ MonoBehaviour:
   checkingFrequency: 1
   distanceFromHead: 1
   IsOffsetRelative: 1
-  downOffset: -0.3
+  downOffset: 0.3
   toShowDuration: 0.5
   showCurve:
     serializedVersion: 2
