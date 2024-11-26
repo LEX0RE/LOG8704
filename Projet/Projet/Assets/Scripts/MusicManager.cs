@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
+	private List<NoteComponent> m_MusicalBoxes = new List<NoteComponent>();
 
-    private int m_bpm = 60;
+	[SerializeField]
+	private int m_bpm = 60;
 
-    private float m_halfTimeInSecond;
+	private float m_halfTimeInSecond;
 	private float m_elapsedTime = 0.0f;
-    private float m_time = 0.5f;
-    private float m_lastTime = 1.0f;
+	private float m_time = 0.5f;
+	private float m_lastTime = 1.0f;
+
+	[SerializeField]
 	private float m_WaitTimeBetweenLoop = 5.0f; // seconds
 
-    private bool m_isPlaying = false;
+	private bool m_isPlaying = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
 	{
 		m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
 	}
@@ -32,19 +35,19 @@ public class MusicManager : MonoBehaviour
 
 			if ((m_elapsedTime >= m_halfTimeInSecond) || (m_time == 0.5f))
 			{
-                m_time += 0.5f;
+				m_time += 0.5f;
 
-                foreach (NoteComponent note in m_MusicalBoxes)
-                {
-                    if (note.CheckActiveStatus(m_time))
-                    {
-                        float timeStartTimeDelta = m_time - note.StartTime;
-                        if (timeStartTimeDelta >= 0 && (timeStartTimeDelta % note.Frequency) == 0)
-                        {
-                            note.Play();
-                        }
-                    }
-                }
+				foreach (NoteComponent note in m_MusicalBoxes)
+				{
+					if (note.CheckActiveStatus(m_time))
+					{
+						float timeStartTimeDelta = m_time - note.StartTime;
+						if (timeStartTimeDelta >= 0 && (timeStartTimeDelta % note.Frequency) == 0)
+						{
+							note.Play();
+						}
+					}
+				}
 
 				m_elapsedTime = 0.0f;
 
@@ -54,7 +57,7 @@ public class MusicManager : MonoBehaviour
 				{
 					m_time = 0.5f;
 				}
-            }
+			}
 		}
 	}
 
@@ -70,69 +73,66 @@ public class MusicManager : MonoBehaviour
 			int newBpm = m_bpm + 5;
 			SetBpm(newBpm);
 		}
-		
+
 	}
 
 	public void DecrementBpm()
 	{
 		if (!m_isPlaying)
 		{
-            int newBpm = m_bpm - 5;
-            SetBpm(newBpm);
-        }
+			int newBpm = m_bpm - 5;
+			SetBpm(newBpm);
+		}
 	}
 
 	public void StartMusic()
 	{
 		ResetMusic();
-        m_isPlaying = true;
-    }
+		m_isPlaying = true;
+	}
 
 	public void StopMusic()
 	{
-        foreach (NoteComponent note in m_MusicalBoxes)
-        {
-            note.Stop();
-        }
+		foreach (NoteComponent note in m_MusicalBoxes)
+		{
+			note.Stop();
+		}
 
 		ResetMusic();
-    }
+	}
 
 	public void PauseMusic()
 	{
 		m_isPlaying = false;
 
-        foreach (NoteComponent note in m_MusicalBoxes)
-        {
-            note.Pause();
-        }
-    }
+		foreach (NoteComponent note in m_MusicalBoxes)
+		{
+			note.Pause();
+		}
+	}
 
 	public void UnPauseMusic()
 	{
-        m_isPlaying = true;
+		m_isPlaying = true;
 
-        foreach (NoteComponent note in m_MusicalBoxes)
-        {
-            note.UnPause();
-        }
-    }
+		foreach (NoteComponent note in m_MusicalBoxes)
+		{
+			note.UnPause();
+		}
+	}
 
 	public void RegisterNote(NoteComponent newNote)
 	{
-		float newNoteEndTime = newNote.GetEndTime();
-
-        if (newNoteEndTime > m_lastTime)
-		{
-			m_lastTime = newNoteEndTime;
-		}
-
 		m_MusicalBoxes.Add(newNote);
+
+		this.UpdateEndMusicTime();
 	}
 
 	public void UnregisterNote(NoteComponent noteToUnregister)
 	{
 		m_MusicalBoxes.Remove(noteToUnregister);
+
+		this.UpdateEndMusicTime();
 	}
 
 	public List<NoteComponent> Notes
@@ -143,19 +143,34 @@ public class MusicManager : MonoBehaviour
 		}
 	}
 
-    private void ResetMusic()
-    {
-        m_isPlaying = false;
-        m_time = 0.5f;
-        m_elapsedTime = 0.0f;
-    }
+	private void ResetMusic()
+	{
+		m_isPlaying = false;
+		m_time = 0.5f;
+		m_elapsedTime = 0.0f;
+	}
 
-    private void SetBpm(int newBpm)
-    {
-        if (newBpm >= 40 && newBpm <= 280)
-        {
-            m_bpm = newBpm;
-            m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
-        }
-    }
+	private void SetBpm(int newBpm)
+	{
+		if (newBpm >= 40 && newBpm <= 280)
+		{
+			m_bpm = newBpm;
+			m_halfTimeInSecond = 60.0f / (2 * (float)m_bpm);
+		}
+	}
+
+	public void UpdateEndMusicTime()
+	{
+		m_lastTime = 1.0f;
+
+		foreach (NoteComponent note in m_MusicalBoxes)
+		{
+			float noteEndTime = note.GetEndTime();
+
+			if (note.GetEndTime() > m_lastTime)
+			{
+				m_lastTime = noteEndTime;
+			}
+		}
+	}
 }
