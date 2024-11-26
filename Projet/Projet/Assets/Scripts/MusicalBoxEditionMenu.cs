@@ -7,10 +7,11 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	// TODO faire des prefabs avec un script d�di� pour contr�ler les valeurs
 	// affich�es pour la dur�e du son et de la note, ainsi que la fr�quence
 	private NoteChoices m_SelectedNote = NoteChoices.Do;
-
 	private float m_SoundDuration = 0.5f;
 	private float m_Frequency = 0.5f;
 	private float m_NoteDuration = 0.5f;
+	private float m_StartTime = 1.0f;
+
 	private GameObject m_Parent;
 	private bool m_IsMenuVisible;
 
@@ -36,8 +37,9 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	[SerializeField] private TMPro.TMP_Text m_SoundDurationLabel;
 	[SerializeField] private TMPro.TMP_Text m_FrequencyLabel;
 	[SerializeField] private TMPro.TMP_Text m_NoteDurationLabel;
-	[SerializeField] private GameObject m_UiPanel;
 	[SerializeField] private TMPro.TMP_Dropdown m_NoteSelectionLabel;
+	[SerializeField] private TMPro.TMP_Text m_StartTimeLabel;
+	[SerializeField] private GameObject m_UiPanel;
 
 	private MusicalBoxEdition m_MusicalBoxEdition;
 	private HandTrackingManager m_HandTrackingManager;
@@ -67,6 +69,8 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		m_SoundDurationLabel.text = FormatFloatToString(m_SoundDuration);
 		m_FrequencyLabel.text = FormatFloatToString(m_Frequency);
 		m_NoteDurationLabel.text = FormatFloatToString(m_NoteDuration);
+		m_StartTimeLabel.text = FormatFloatToString(m_StartTime);
+
 		m_Parent = this.gameObject.transform.parent.gameObject;
 		m_UiPanel.SetActive(false);
 		IsMenuVisible = false;
@@ -90,10 +94,12 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		m_SoundDuration = note.SoundDuration;
 		m_Frequency = note.Frequency;
 		m_NoteDuration = note.NoteDuration;
+		m_StartTime = note.StartTime;
 
 		m_SoundDurationLabel.text = m_SoundDuration.ToString();
 		m_FrequencyLabel.text = m_Frequency.ToString();
 		m_NoteDurationLabel.text = m_NoteDuration.ToString();
+		m_StartTimeLabel.text = m_StartTime.ToString();
 	}
 
 	public void SelectNote(int indexSelection)
@@ -167,7 +173,27 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		m_NoteDurationLabel.text = m_NoteDuration.ToString();
 	}
 
-	public void SetUiPanelVisibility(bool isVisible)
+    public void IncrementStartTime()
+    {
+        m_StartTime += 0.5f;
+        m_StartTime = Mathf.Max(1.0f, m_StartTime);
+        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+        note.StartTime = m_StartTime;
+
+        m_StartTimeLabel.text = m_StartTime.ToString();
+    }
+
+    public void DecrementStartTime()
+    {
+        m_StartTime -= 0.5f;
+        m_StartTime = Mathf.Max(1.0f, m_StartTime);
+        var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+        note.StartTime = m_StartTime;
+
+        m_StartTimeLabel.text = m_StartTime.ToString();
+    }
+
+    public void SetUiPanelVisibility(bool isVisible)
 	{
 		m_UiPanel.SetActive(isVisible);
 		IsMenuVisible = isVisible;
