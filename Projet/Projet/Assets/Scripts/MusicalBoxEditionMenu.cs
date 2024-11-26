@@ -210,18 +210,21 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		bool isLeftHandBeingUsed = m_MusicalBoxEdition.IsFollowedLeftHand;
 		Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
 		HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
-		
-		if (isLeftHandBeingUsed)
-		{
-            m_offsetTranslation = Vector3.zero;
-        }
-        else
-        {
-            m_offsetTranslation = 0.2f * (handTransform.rotation * Vector3.right);
-        }
 
-        m_Parent.transform.SetPositionAndRotation(
-			handTransform.position + m_offsetTranslation,
-			handTransform.rotation * Quaternion.Euler(0, 90, -180));
+		if( handTransform != null )
+		{
+			if (isLeftHandBeingUsed)
+			{
+				m_offsetTranslation = Vector3.zero;
+			}
+			else
+			{
+				m_offsetTranslation = 0.2f * (handTransform.rotation * Vector3.right);
+			}
+
+			m_Parent.transform.SetPositionAndRotation(
+				handTransform.position + m_offsetTranslation,
+				handTransform.rotation * Quaternion.Euler(0, 90, -180));
+		}
 	}
 }
