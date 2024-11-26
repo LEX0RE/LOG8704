@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public enum NoteChoices
 {
@@ -20,40 +22,31 @@ public enum NoteChoices
 
 public class NoteComponent : MonoBehaviour
 {
-	[SerializeField]
-	private NoteChoices m_Note = NoteChoices.Do;
+	[SerializeField] private NoteChoices m_Note = NoteChoices.Do;
 
-	[SerializeField]
-	private AudioClip m_Sound;
+	[SerializeField] private AudioClip m_Sound;
 
-	[SerializeField]
-	private float m_SoundDuration;
+	[SerializeField] private float m_SoundDuration;
 
-	[SerializeField]
-	private float m_Frequency = 1.0f;
+	[SerializeField] private float m_Frequency = 1.0f;
 
-	[SerializeField]
-	private float m_Volume = 1.0f;
+	[SerializeField] private float m_Volume = 1.0f;
 
-	[SerializeField]
-	private float m_startTime = 1.0f;
+	[SerializeField] private float m_startTime = 1.0f;
 
-	[SerializeField]
-	private float m_noteDuration = 8.0f;
+	[SerializeField] private float m_noteDuration = 8.0f;
 
-	[SerializeField]
-	private float m_colorFlashingTime = 0.25f;
+	[SerializeField] private float m_colorFlashingTime = 0.25f;
 
 	private bool m_isActive;
 
+	private XRGrabInteractable m_grabInteractable;
 	private MusicManager m_musicManager;
 	private AudioSource m_AudioSource;
 
-	[SerializeField]
-	private Color m_disabledColor = Color.grey;
+	[SerializeField] private Color m_disabledColor = Color.grey;
 
-	[SerializeField]
-	private Color m_flashingColor = Color.white;
+	[SerializeField] private Color m_flashingColor = Color.white;
 	private Color m_baseColor = Color.green;
 
 	private float lastPlayingSound;
@@ -104,6 +97,8 @@ public class NoteComponent : MonoBehaviour
 		}
 	}
 
+
+
 	public float StartTime
 	{
 		get { return m_startTime; }
@@ -123,6 +118,7 @@ public class NoteComponent : MonoBehaviour
 			this.m_musicManager.UpdateEndMusicTime();
 		}
 	}
+
 
 	public void OnSetup()
 	{
@@ -145,6 +141,9 @@ public class NoteComponent : MonoBehaviour
 		RegisterToManager();
 	}
 
+	private bool isSelected = false;
+	private bool isTapable = false;
+
 	public void Update()
 	{
 		float diff = Time.time - this.lastPlayingSound;
@@ -160,16 +159,40 @@ public class NoteComponent : MonoBehaviour
 			float t = Math.Abs(diff) / this.m_colorFlashingTime;
 			SetColor(Color.Lerp(fromColor, toColor, diff > 0 ? t : 1 - t));
 		}
+
+		//Give some time after releasing the grab in order to tap the note
+		float delayBeforeTapping = 0.5f;
+		if (isSelected && !m_grabInteractable.isSelected)
+		{
+			//Coroutine here
+			StartCoroutine(ActivateTapping());
+		}
+
+		isSelected = m_grabInteractable.isSelected;
+		if (isSelected)
+		{
+			isTapable = false;
+		}
 	}
 
-	private void OnDestroy()
+	private IEnumerator  ActivateTapping()
+	{
+		yield return new WaitForSeconds(0.5f);
+		isTapable = true;
+
+	}
+
+private void OnDestroy()
 	{
 		UnregisterToManager();
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Play();
+		if (isTapable)
+		{
+			Play();
+		}
 	}
 
 	private void UnregisterToManager()
@@ -265,5 +288,9 @@ public class NoteComponent : MonoBehaviour
 			case NoteChoices.Si: return new Color(153, 255, 0);
 			default: return Color.green;
 		};
+	}
+	private void Start()
+	{
+		m_grabInteractable = GetComponent<XRGrabInteractable>();
 	}
 }

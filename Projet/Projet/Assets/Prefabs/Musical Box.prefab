@@ -272,9 +272,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e98dc986501a646a946a53b01484aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Sound: {fileID: 8300000, guid: 5101c2bb5d881064f8de2616255250f9, type: 3}
+  m_Note: 0
+  m_Sound: {fileID: 8300000, guid: 73b4a8314ecb86143816245308b63605, type: 3}
   m_SoundDuration: 1
   m_Frequency: 1
   m_Volume: 1
   m_startTime: 1
   m_noteDuration: 8
+  m_colorFlashingTime: 0.25
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_flashingColor: {r: 1, g: 1, b: 1, a: 1}
