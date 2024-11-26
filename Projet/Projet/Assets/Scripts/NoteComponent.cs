@@ -1,8 +1,28 @@
 using System;
 using UnityEngine;
 
+public enum NoteChoices
+{
+	Do,
+	Do_d,
+	Re,
+	Re_d,
+	Mi,
+	Fa,
+	Fa_d,
+	Sol,
+	Sol_d,
+	La,
+	La_d,
+	Si,
+	End // TODO : Recheck pourquoi ici on a besoin d'un End ?
+}
+
 public class NoteComponent : MonoBehaviour
 {
+	[SerializeField]
+	private NoteChoices m_Note = NoteChoices.Do;
+
 	[SerializeField]
 	private AudioClip m_Sound;
 
@@ -29,10 +49,29 @@ public class NoteComponent : MonoBehaviour
 	private MusicManager m_musicManager;
 	private AudioSource m_AudioSource;
 
-	private Color m_flashingColor = Color.blue;
+	[SerializeField]
+	private Color m_disabledColor = Color.grey;
+
+	[SerializeField]
+	private Color m_flashingColor = Color.white;
+	private Color m_baseColor = Color.green;
+
 	private float lastPlayingSound;
 
 	//Getter and Setter
+	public NoteChoices Note
+	{
+		get { return m_Note; }
+		set
+		{
+			this.m_Note = value;
+			this.m_baseColor = this.GetNoteTypeColor();
+
+			Color.RGBToHSV(this.m_baseColor, out float h, out float s, out float v);
+			this.m_disabledColor = Color.HSVToRGB(h, 25f, 50f);
+		}
+	}
+
 	public AudioClip Sound
 	{
 		get { return m_Sound; }
@@ -105,12 +144,12 @@ public class NoteComponent : MonoBehaviour
 		float diff = Time.time - this.lastPlayingSound;
 		if (Math.Abs(diff) < this.m_colorFlashingTime)
 		{
-			Color baseColor = this.m_isActive ? Color.green : Color.grey;
+			Color baseColor = this.m_isActive ? this.m_baseColor : this.m_disabledColor;
 			Color fromColor = baseColor;
 			Color toColor = baseColor;
 
-			if (diff > 0) fromColor = Color.blue;
-			else toColor = Color.blue;
+			if (diff > 0) fromColor = this.m_flashingColor;
+			else toColor = this.m_flashingColor;
 
 			float t = Math.Abs(diff) / this.m_colorFlashingTime;
 			SetColor(Color.Lerp(fromColor, toColor, diff > 0 ? t : 1 - t));
@@ -124,7 +163,6 @@ public class NoteComponent : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		//TODO: Play the sound when the user tap the note
 		Play();
 	}
 
@@ -144,23 +182,23 @@ public class NoteComponent : MonoBehaviour
 		m_AudioSource.Play();
 	}
 
-    public void Stop()
-    {
-        this.SetColor(Color.grey);
-        m_AudioSource.Stop();
-    }
+	public void Stop()
+	{
+		this.SetColor(this.m_disabledColor);
+		m_AudioSource.Stop();
+	}
 
-    public void Pause()
-    {
+	public void Pause()
+	{
 		m_AudioSource.Pause();
-    }
+	}
 
 	public void UnPause()
 	{
 		m_AudioSource.UnPause();
 	}
 
-    public float GetEndTime()
+	public float GetEndTime()
 	{
 		return m_startTime + m_noteDuration;
 	}
@@ -174,12 +212,12 @@ public class NoteComponent : MonoBehaviour
 	{
 		if (m_isActive && (time < m_startTime || time >= GetEndTime()))
 		{
-			this.SetColor(Color.grey);
+			this.SetColor(this.m_disabledColor);
 			m_isActive = false;
 		}
 		else if (!m_isActive && time >= m_startTime && time < GetEndTime())
 		{
-			this.SetColor(Color.green);
+			this.SetColor(this.m_baseColor);
 			m_isActive = true;
 		}
 
@@ -197,7 +235,27 @@ public class NoteComponent : MonoBehaviour
 		m_AudioSource.time = m_SoundDuration;
 		m_AudioSource.volume = m_Volume;
 
-		if (this.m_isActive) this.SetColor(Color.green);
-		else this.SetColor(Color.grey);
+		if (this.m_isActive) this.SetColor(this.GetNoteTypeColor());
+		else this.SetColor(this.m_disabledColor);
+	}
+
+	private Color GetNoteTypeColor()
+	{
+		switch (this.m_Note)
+		{
+			case NoteChoices.Do: return new Color(40, 255, 0);
+			case NoteChoices.Do_d: return new Color(0, 255, 232);
+			case NoteChoices.Re: return new Color(0, 124, 255);
+			case NoteChoices.Re_d: return new Color(5, 0, 255);
+			case NoteChoices.Mi: return new Color(69, 0, 234);
+			case NoteChoices.Fa: return new Color(85, 0, 79);
+			case NoteChoices.Fa_d: return new Color(116, 0, 0);
+			case NoteChoices.Sol: return new Color(179, 0, 0);
+			case NoteChoices.Sol_d: return new Color(238, 0, 0);
+			case NoteChoices.La: return new Color(255, 99, 0);
+			case NoteChoices.La_d: return new Color(255, 236, 0);
+			case NoteChoices.Si: return new Color(153, 255, 0);
+			default: return Color.green;
+		};
 	}
 }

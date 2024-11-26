@@ -41,17 +41,6 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 	private MusicalBoxEdition m_MusicalBoxEdition;
 	private HandTrackingManager m_HandTrackingManager;
 
-	private enum NoteChoices
-	{
-		Do,
-		Re,
-		Mi,
-		Fa,
-		Sol,
-		La,
-		Si,
-		End
-	}
 
 	public List<AudioClip> m_AudioClips = new List<AudioClip>();
 
@@ -93,12 +82,12 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 
 	private void UpdateMenuLabel()
 	{
-		
+
 		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
 		m_SoundDuration = note.SoundDuration;
 		m_Frequency = note.Frequency;
 		m_NoteDuration = note.NoteDuration;
-		
+
 		m_SoundDurationLabel.text = m_SoundDuration.ToString();
 		m_FrequencyLabel.text = m_Frequency.ToString();
 		m_NoteDurationLabel.text = m_NoteDuration.ToString();
@@ -109,6 +98,7 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 		m_SelectedNote = (NoteChoices)indexSelection;
 
 		var note = m_MusicalBoxEdition.NoteInEdition.GetComponent<NoteComponent>();
+		note.Note = m_SelectedNote;
 		note.Sound = m_AudioClips[indexSelection];
 	}
 
@@ -176,7 +166,6 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 
 	public void SetUiPanelVisibility(bool isVisible)
 	{
-		Debug.Log("SetUiPanelVisibility: isVisible -> " + isVisible);
 		m_UiPanel.SetActive(isVisible);
 		IsMenuVisible = isVisible;
 	}
@@ -188,13 +177,12 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 
 	void UpdateMenuPosition()
 	{
-		Debug.Log("UpdateMenuPosition");
 		bool isLeftHandBeingUsed = m_MusicalBoxEdition.IsFollowedLeftHand;
 		Handedness handedness = isLeftHandBeingUsed ? Handedness.Left : Handedness.Right;
 		HandTransform handTransform = m_HandTrackingManager.GetHandTransform(handedness);
 
 		m_Parent.transform.SetPositionAndRotation(
-            handTransform.position + new Vector3((isLeftHandBeingUsed ? 0 : -0.2f), 0f, 0f),
+			handTransform.position + new Vector3((isLeftHandBeingUsed ? 0 : -0.2f), 0f, 0f),
 			handTransform.rotation * Quaternion.Euler(0, 90, -180));
 	}
 }
