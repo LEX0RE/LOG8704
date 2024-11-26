@@ -4,9 +4,11 @@ using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.XR.Hands;
 using UnityEngine.XR.Hands.Gestures;
 using UnityEngine.XR.Management;
+using Volorf.VRNotifications;
 
 [Serializable]
 public class PoseDetectionList
@@ -38,6 +40,11 @@ public class PoseDetection
 	[SerializeField]
 	[Tooltip("The hand that will detect the pose.")]
 	public Handedness handToDetect;
+
+	[FormerlySerializedAs("poseName")]
+	[SerializeField] 
+	[Tooltip("The name of the hand pose")]
+	public string message;
 
 	[NonSerialized]
 	public bool wasDetected;
@@ -222,6 +229,7 @@ class HandTracker
 			if (!poseDetection.performedTriggered && detected && Time.timeSinceLevelLoad - poseDetection.holdStartTime > poseDetection.minimumHoldTime)
 			{
 				poseDetection.posePerformedEvent?.Invoke();
+				NotificationManager.Instance.SendMessage(poseDetection.message);
 				poseDetection.performedTriggered = true;
 			}
 		}
