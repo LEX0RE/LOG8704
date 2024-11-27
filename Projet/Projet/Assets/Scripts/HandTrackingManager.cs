@@ -27,7 +27,16 @@ public class PoseDetection
 
 	[SerializeField]
 	[Tooltip("The minimum amount of time the hand must be held in the required shape and orientation for the pose to be performed.")]
-	public float minimumHoldTime = 0.2f;
+	public float minimumHoldTime = 0.5f;
+
+	[SerializeField]
+	[Tooltip("The hand that will detect the pose.")]
+	public Handedness handToDetect;
+
+	[FormerlySerializedAs("poseName")]
+	[SerializeField]
+	[Tooltip("The name of the hand pose")]
+	public string message;
 
 	[SerializeField]
 	[Tooltip("The event fired when the pose is performed.")]
@@ -37,15 +46,6 @@ public class PoseDetection
 	[Tooltip("The event fired when the pose is ended.")]
 	public UnityEvent poseEndedEvent;
 
-	[SerializeField]
-	[Tooltip("The hand that will detect the pose.")]
-	public Handedness handToDetect;
-
-	[FormerlySerializedAs("poseName")]
-	[SerializeField] 
-	[Tooltip("The name of the hand pose")]
-	public string message;
-
 	[NonSerialized]
 	public bool wasDetected;
 
@@ -54,6 +54,9 @@ public class PoseDetection
 
 	[NonSerialized]
 	public float holdStartTime;
+
+	[NonSerialized]
+	public float holdEndTime;
 }
 
 public class HandTransform
@@ -220,8 +223,7 @@ class HandTracker
 			}
 			else if (poseDetection.wasDetected && !detected)
 			{
-				poseDetection.performedTriggered = false;
-				poseDetection.poseEndedEvent?.Invoke();
+				poseDetection.holdEndTime = Time.timeSinceLevelLoad;
 			}
 
 			poseDetection.wasDetected = detected;
@@ -231,6 +233,11 @@ class HandTracker
 				poseDetection.posePerformedEvent?.Invoke();
 				NotificationManager.Instance.SendMessage(poseDetection.message);
 				poseDetection.performedTriggered = true;
+			}
+			else if (poseDetection.performedTriggered && !detected && Time.timeSinceLevelLoad - poseDetection.holdEndTime > poseDetection.minimumHoldTime)
+			{
+				poseDetection.poseEndedEvent?.Invoke();
+				poseDetection.performedTriggered = false;
 			}
 		}
 

@@ -297,18 +297,18 @@ public class NoteComponent : MonoBehaviour
 	{
 		switch (this.m_Note)
 		{
-			case NoteChoices.Do: return new Color(40, 255, 0);
-			case NoteChoices.Do_d: return new Color(0, 255, 232);
-			case NoteChoices.Re: return new Color(0, 124, 255);
-			case NoteChoices.Re_d: return new Color(5, 0, 255);
-			case NoteChoices.Mi: return new Color(69, 0, 234);
-			case NoteChoices.Fa: return new Color(85, 0, 79);
-			case NoteChoices.Fa_d: return new Color(116, 0, 0);
-			case NoteChoices.Sol: return new Color(179, 0, 0);
-			case NoteChoices.Sol_d: return new Color(238, 0, 0);
-			case NoteChoices.La: return new Color(255, 99, 0);
-			case NoteChoices.La_d: return new Color(255, 236, 0);
-			case NoteChoices.Si: return new Color(153, 255, 0);
+			case NoteChoices.Do: return new Color(0.15686f, 1.0f, 0.0f);
+			case NoteChoices.Do_d: return new Color(0.0f, 1.0f, 0.90980f);
+			case NoteChoices.Re: return new Color(0.0f, 0.48627f, 1.0f);
+			case NoteChoices.Re_d: return new Color(0.01961f, 0.0f, 1.0f);
+			case NoteChoices.Mi: return new Color(0.27059f, 0.0f, 0.91765f);
+			case NoteChoices.Fa: return new Color(0.33333f, 0.0f, 0.30980f);
+			case NoteChoices.Fa_d: return new Color(0.45490f, 0.0f, 0.0f);
+			case NoteChoices.Sol: return new Color(0.70196f, 0.0f, 0.0f);
+			case NoteChoices.Sol_d: return new Color(0.93333f, 0.0f, 0.0f);
+			case NoteChoices.La: return new Color(1.0f, 0.38824f, 0.0f);
+			case NoteChoices.La_d: return new Color(1.0f, 0.92549f, 0.0f);
+			case NoteChoices.Si: return new Color(0.60000f, 1.0f, 0.0f);
 			default: return Color.grey;
 		};
 	}
