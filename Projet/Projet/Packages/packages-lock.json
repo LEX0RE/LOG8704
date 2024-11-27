@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.meta.xr.sdk.core": {
+      "version": "71.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.burst": {
       "version": "1.8.16",
       "depth": 1,
@@ -366,15 +373,6 @@
       "source": "registry",
       "dependencies": {
         "com.unity.xr.management": "4.0.1"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.xr.oculus": {
-      "version": "4.2.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.xr.management": "4.4.0"
       },
       "url": "https://packages.unity.com"
     },

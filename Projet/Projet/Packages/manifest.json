@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.meta.xr.sdk.core": "71.0.0",
     "com.unity.collab-proxy": "2.5.2",
     "com.unity.feature.development": "1.0.2",
     "com.unity.inputsystem": "1.11.0",
@@ -15,7 +16,6 @@
     "com.unity.xr.management": "4.5.0",
     "com.unity.xr.meta-openxr": "2.0.1",
     "com.unity.xr.mock-hmd": "1.4.0-preview.2",
-    "com.unity.xr.oculus": "4.2.0",
     "com.unity.xr.openxr": "1.12.1",
     "com.volorf.vr-notifications": "https://github.com/Volorf/VR-Notifications.git",
     "com.unity.modules.accessibility": "1.0.0",
