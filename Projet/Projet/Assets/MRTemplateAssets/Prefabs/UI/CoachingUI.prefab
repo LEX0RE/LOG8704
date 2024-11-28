@@ -7376,7 +7376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Placez votre main ouvert face vers le haut pour cr\xE9er une note de 
+  m_text: "Placez votre main ouverte face vers le haut pour cr\xE9er une note de
     musique\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
@@ -11100,7 +11100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Faite un pouce vers le haut pour d\xE9marrer la musique\n\nFaite un pouce
+  m_text: "Faite un pouce vers le haut pour d\xE9marrer la musique et faite un pouce
     vers le bas pour r\xE9initialiser la musique"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
@@ -11128,8 +11128,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13436,7 +13436,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "F\xE9licitation! Vous \xEAtes maintenant pr\xE8s \xE0 devenir un vrai
+  m_text: "F\xE9licitations! Vous \xEAtes maintenant pr\xEAt \xE0 devenir un vrai
     compositeur!!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
