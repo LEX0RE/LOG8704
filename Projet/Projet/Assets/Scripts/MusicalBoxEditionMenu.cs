@@ -152,6 +152,13 @@ public class MusicalBoxEditionMenu : MonoBehaviour
 
 		note.Frequency = m_Frequency;
 		m_FrequencyLabel.text = m_Frequency.ToString();
+
+		if (m_SoundDuration > m_Frequency)
+		{
+			m_SoundDuration = m_Frequency;
+			note.SoundDuration = m_SoundDuration;
+			m_SoundDurationLabel.text = m_SoundDuration.ToString();
+		}
 	}
 
 	public void IncrementNoteDuration()
