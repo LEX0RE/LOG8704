@@ -1478,12 +1478,36 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[2].message
+      value: "Arr\xEAt de la musique"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[3].message
+      value: "D\xE9marrage de la musique"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[4].message
+      value: Mise en pause de la musique
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[5].message
+      value: Reprise de la musique
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[6].message
+      value: "R\xE9duction du BPM"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
+      propertyPath: _poseDetections.list.Array.data[7].message
+      value: Augmentation du BPM
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[8].message
-      value: Starting music
+      value: "D\xE9marrage de la musique"
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[9].message
-      value: Stopping music
+      value: "Arr\xEAt de la musique"
       objectReference: {fileID: 0}
     - target: {fileID: 6396211794949152551, guid: 8c683f78c7ab3244c8fa212c6e3d287a, type: 3}
       propertyPath: _poseDetections.list.Array.data[2].handPose
